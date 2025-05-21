@@ -1,0 +1,34 @@
+.footer-bg {
+    background-color: rgb(59, 16, 99);
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.footer-content {
+    padding: 2rem;
+    color:ghostwhite;
+}
+
+.footer-content * {
+    margin: 0;
+}
+
+.footer-content > h4 {
+    font-size: larger;
+}
+
+.footer-content a {
+    color:ghostwhite;
+}
+
+.footer-content a:hover {
+    transition: .2s;
+    color: rgb(204, 204, 194);
+}
+
+
+.ad-footer {
+    padding-top: 0.5rem;
+}
