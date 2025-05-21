@@ -1,0 +1,19 @@
+
+.header-bg {
+    background-color: rgb(59, 16, 99);
+    width: 100vw;
+    
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 10%;
+    color: rgb(237, 237, 237);
+}
+
+
+.header-content > a {
+    color: rgb(237, 237, 237);
+}
