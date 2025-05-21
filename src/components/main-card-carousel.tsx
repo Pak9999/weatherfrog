@@ -1,0 +1,1 @@
+/* Carousel component that holds cards (hourly or weekly) related to location currently active in main-card */
