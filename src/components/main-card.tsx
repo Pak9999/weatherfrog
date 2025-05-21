@@ -10,13 +10,15 @@ import MainCardDetails from "./main-card-details-list";
 const MainCard: React.FC = () => {
     return (
         <>
-            <div className="main-card">
+            <div className="main-card-container">
                 <MainCardHead />
+                <hr></hr>
                 <MainCardDetails />
                 {/* <MainCardCarousel />
                 <MainCardCarousel /> */}
                 {/* Add relevant to two above components (hourly + weekly) */}
-                <br></br>
+                <hr></hr>
+
             </div>
         </>
     );

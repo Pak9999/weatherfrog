@@ -3,9 +3,9 @@
 }
 
 .header-bg {
-    background-color: rgb(59, 16, 99);
+    background-color: #3B324C;
 
-    height: 7rem;
+    height: 5.2rem;
     
 
 }
@@ -15,7 +15,7 @@
     flex-direction: row;
     margin: 0 10%;
     color:ghostwhite;
-    padding-top: 1.5rem;
+    padding-top: 2rem;
 
 
 
