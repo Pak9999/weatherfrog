@@ -3,7 +3,9 @@ import './App.css'
 import LocationSearch from './components/LocationSearch'
 import WeatherDetailedView from './components/WeatherDetailedView'
 import WeatherSimpleView from './components/WeatherSimpleView'
+import HistoricalWeatherChart from './components/HistoricalWeatherChart'
 import { getDetailedWeather, getSimpleWeather, getFavorites, getRecentSearches, saveFavorite, saveRecentSearch } from './services/weatherService'
+import { getLocationNameFromCoords } from './utils/geocoderUtil'
 import type { WeatherDetailedResponse, WeatherSimpleResponse } from './types/weather'
 
 function App() {
@@ -15,11 +17,55 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [favorites, setFavorites] = useState<Array<{ name: string, latitude: number, longitude: number }>>([])
   const [recentSearches, setRecentSearches] = useState<Array<{ name: string, latitude: number, longitude: number }>>([])
+  const [userLatitude, setUserLatitude] = useState<number | null>(null)
+  const [userLongitude, setUserLongitude] = useState<number | null>(null)
 
   // Load favorites and recent searches from localStorage on component mount
   useEffect(() => {
     setFavorites(getFavorites())
     setRecentSearches(getRecentSearches())
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          setUserLatitude(latitude)
+          setUserLongitude(longitude)
+          
+          // Try to get location name using reverse geocoding
+          try {
+            const geoData = await getLocationNameFromCoords(latitude, longitude);
+            const locationName = geoData.city || geoData.state || geoData.displayName.split(',')[0];
+            setSelectedLocation({ 
+              latitude, 
+              longitude, 
+              name: locationName || "Current Location"
+            });
+          } catch (geoError) {
+            console.error("Error getting location name:", geoError);
+            setSelectedLocation({ 
+              latitude, 
+              longitude, 
+              name: "Current Location" 
+            });
+          }
+        },
+        (error) => {
+          console.error("Error getting user location:", error)
+          // Fallback to a default location if geolocation fails or is denied
+          setUserLatitude(52.52) // Berlin as a fallback
+          setUserLongitude(13.405)
+          setSelectedLocation({ latitude: 52.52, longitude: 13.405, name: "Berlin (Fallback)" })
+        }
+      )
+    } else {
+      console.error("Geolocation is not supported by this browser.")
+      // Fallback to a default location if geolocation is not supported
+      setUserLatitude(52.52)
+      setUserLongitude(13.405)
+      setSelectedLocation({ latitude: 52.52, longitude: 13.405, name: "Berlin (Fallback)" })
+    }
   }, [])
 
   const handleLocationSelect = async (location: { name: string, latitude: number, longitude: number }) => {
@@ -79,6 +125,10 @@ function App() {
       saveFavorite(selectedLocation)
       setFavorites(getFavorites())
     }
+  }
+
+  if (!selectedLocation) {
+    return <div>Loading location...</div> // Or some other loading state
   }
 
   return (
@@ -144,6 +194,16 @@ function App() {
               ))}
             </ul>
           </div>
+        )}
+      </div>
+
+      <div className="historical-weather-chart-section">
+        {userLatitude && userLongitude && (
+          <HistoricalWeatherChart 
+            initialLatitude={userLatitude} 
+            initialLongitude={userLongitude} 
+            initialLocationName={selectedLocation.name} // Pass the name of the initially selected location
+          />
         )}
       </div>
     </div>
