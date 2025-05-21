@@ -1,5 +1,6 @@
 import React from "react";
 import "./body.css"
+import MainCard from "../components/main-card.tsx"
 
 
 
@@ -7,7 +8,7 @@ const Body: React.FC = () => {
     return (
         <>
             <div className="main-body">
-                <h2>Hejhopp</h2>
+                <MainCard />
             </div>
         </>
     );

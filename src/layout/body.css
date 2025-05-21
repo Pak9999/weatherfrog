@@ -3,6 +3,7 @@
     background-color: bisque;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    min-height: 50vh;
 }
 
 .main-body > h2 {

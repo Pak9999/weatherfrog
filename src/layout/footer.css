@@ -1,9 +1,5 @@
 .footer-bg {
     background-color: rgb(59, 16, 99);
-    width: 100vw;
-    position: fixed;
-    left: 0;
-    bottom: 0;
 }
 
 .footer-content {
