@@ -5,6 +5,8 @@ import React from "react";
 import "./main-card.css";
 import MainCardHead from "./main-card-head";
 import MainCardDetails from "./main-card-details-list";
+import MainCardCarousel from "./main-card-carousel";
+
 
 
 const MainCard: React.FC = () => {
@@ -14,11 +16,11 @@ const MainCard: React.FC = () => {
                 <MainCardHead />
                 <hr></hr>
                 <MainCardDetails />
-                {/* <MainCardCarousel />
-                <MainCardCarousel /> */}
-                {/* Add relevant to two above components (hourly + weekly) */}
                 <hr></hr>
-
+                <MainCardCarousel />
+                <hr></hr>
+                <MainCardCarousel />
+                {/* Add relevant to two above components (hourly + weekly) */}
             </div>
         </>
     );

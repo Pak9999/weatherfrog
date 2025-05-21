@@ -7,7 +7,6 @@
 
     height: 5.2rem;
     
-
 }
 
 .header-content {
@@ -16,6 +15,7 @@
     margin: 0 10%;
     color:ghostwhite;
     padding-top: 2rem;
+    justify-content: left;
 
 
 

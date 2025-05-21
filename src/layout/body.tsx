@@ -1,7 +1,8 @@
 import React from "react";
 import "./body.css"
 import MainCard from "../components/main-card.tsx"
-
+import FavoritesList from "../components/favorites-list.tsx";
+import LastViewedList from "../components/last-viewed-list.tsx";
 
 
 const Body: React.FC = () => {
@@ -9,6 +10,9 @@ const Body: React.FC = () => {
         <>
             <div className="main-body">
                 <MainCard />
+                <FavoritesList />
+                <LastViewedList />
+
             </div>
         </>
     );

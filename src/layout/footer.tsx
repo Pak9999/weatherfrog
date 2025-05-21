@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
         <>
             <footer className="footer-bg">
                 <section className="footer-content">
-                    <h4>WetterFroch</h4>
+                    <h4>WetterFrosch</h4>
                     <p>Data provided by <a href="https://open-meteo.com/">open-meteo-com</a></p>
                     <div className="ad-footer">
                         <p>Additional footer text</p>
