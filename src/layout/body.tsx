@@ -3,6 +3,7 @@ import "./body.css"
 import MainCard from "../components/main-card.tsx"
 import FavoritesList from "../components/favorites-list.tsx";
 import LastViewedList from "../components/last-viewed-list.tsx";
+import CompareTemp from "../components/compare-temp.tsx";
 
 
 const Body: React.FC = () => {
@@ -12,7 +13,7 @@ const Body: React.FC = () => {
                 <MainCard />
                 <FavoritesList />
                 <LastViewedList />
-
+                <CompareTemp />
             </div>
         </>
     );
