@@ -1,0 +1,59 @@
+
+.medium-card {
+    width: 440px;
+    height: 240px;
+    background-color: rgb(249, 249, 249);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.297);
+}
+
+.medium-card-container {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.medium-card-container * {
+    margin: 0;
+}
+
+.medium-card-left-column{
+    text-align: left;
+    padding-right: 1rem;
+}
+
+.medium-card-temp {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+
+
+.medium-card-maxmin, .rain-and-wind {
+    display: flex;
+    flex-direction: row;
+}
+
+.medium-card-maxmin div:first-child, .rain-and-wind div:first-child {
+    width: 6rem;
+}
+
+
+.medium-card-maxmin *, .rain-and-wind * {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+.medium-card-right-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.medium-card-weather-icon {
+    height: 11rem;
+}
+

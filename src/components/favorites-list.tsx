@@ -3,7 +3,7 @@
 
 import React from "react";
 import "./favorites-list.css"
-
+import MediumCard from "./medium-card";
 
 const FavoritesList: React.FC = () => {
     return (
@@ -11,7 +11,7 @@ const FavoritesList: React.FC = () => {
             <div className="favorites-container">
                 <h3>Favorites</h3>
                 <div className="favorites-carousel">
-                    <p>Here is a placeholder</p>
+                    <MediumCard />
                 </div>
 
             </div>

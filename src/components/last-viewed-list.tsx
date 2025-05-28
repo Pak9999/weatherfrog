@@ -3,6 +3,7 @@
 
 import React from "react";
 import "./last-viewed-list.css"
+import MediumCard from "./medium-card";
 
 
 const LastViewedList: React.FC = () => {
@@ -11,7 +12,7 @@ const LastViewedList: React.FC = () => {
             <div className="last-viewed-container">
                 <h3>Last Viewed</h3>
                 <div className="last-viewed-carousel">
-                    <p>Here is a placeholder</p>
+                    <MediumCard />
                 </div>
 
             </div>
