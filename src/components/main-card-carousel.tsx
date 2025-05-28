@@ -35,6 +35,71 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
                                     weatherIcon="/src/assets/react.svg"
                                     temperature="20°C"
                                     />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
+                                    <HourlyCard
+                                    hour="14:00"
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature="20°C"
+                                    />
                                 </>
                             ) : ( 
                                 <>
@@ -47,7 +112,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
                                     />
                                 </>
                             )
-                            )}
+                            }
                         </div>
                     </div>
                 </div>
