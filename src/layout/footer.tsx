@@ -8,10 +8,10 @@ const Footer: React.FC = () => {
             <footer className="footer-bg">
                 <section className="footer-content">
                     <h4>WetterFrosch</h4>
-                    <p>Data provided by <a href="https://open-meteo.com/">open-meteo-com</a></p>
+                    <p>Weather data provided by <a href="https://open-meteo.com/" target="_blank">open-meteo-com</a></p>
                     <div className="ad-footer">
                         <p>Additional footer text</p>
-                        <a href="#">Visit our Github</a>
+                        <a href="https://github.com/Pak9999/weatherfrog" target="_blank">Visit our Github</a>
                     </div>
                 </section>
 
