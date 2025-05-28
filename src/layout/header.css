@@ -4,7 +4,6 @@
 
 .header-bg {
     background-color: #3B324C;
-
     height: 5.2rem;
     
 }
@@ -15,8 +14,8 @@
     margin: 0 10%;
     color:ghostwhite;
     padding-top: 2rem;
-    justify-content: left;
-
+    justify-content: center;
+    padding-right: 30%;
 
 
 }
