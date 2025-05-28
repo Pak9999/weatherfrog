@@ -1,0 +1,12 @@
+
+
+
+.carousel-test {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

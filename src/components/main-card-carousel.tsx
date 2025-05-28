@@ -2,6 +2,10 @@
 
 
 import React from "react";
+import HourlyCard from "./hourly-card";
+import WeeklyCard from "./weekly-card";
+
+import "./main-card-carousel.css";
 
 
 const MainCardCarousel: React.FC = () => {
@@ -9,8 +13,12 @@ const MainCardCarousel: React.FC = () => {
         <>
             <div className="main-card-carousel-container">
                 <h3>Title</h3>
-                <div className="carousel">
-                    <p>Place hourly or weekly cards here</p>
+                <div className="carousel-test">
+                    <WeeklyCard />
+                    <WeeklyCard />
+                    <WeeklyCard />
+                    <WeeklyCard />
+
                 </div>
 
             </div>
