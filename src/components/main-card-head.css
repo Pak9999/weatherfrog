@@ -1,0 +1,92 @@
+
+.current-location {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1rem;
+}
+
+.location * {
+    margin: 0;
+    text-align: center;
+}
+
+.location h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 0.9;
+}
+
+.location p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.location {
+    margin-bottom: 1rem;
+}
+
+.temp-and-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+
+.current-location-temperature {
+    font-size: 5rem;
+    margin: 0;
+    font-weight: 700;
+    line-height: 0.9;
+}
+
+.temperature {
+    margin-right: 1rem;
+
+}
+
+.temperature p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.current-weather-icon {
+    height: 10rem;
+}
+
+
+.current-max-min {
+
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+}
+
+.type-and-maxmin h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+
+}
+
+.current-max-min p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+@media screen and (max-width: 660px) {
+    .type-and-maxmin {
+        width: 90%;
+    }
+
+
+
+}
