@@ -27,6 +27,10 @@
     font-weight: 700;
 }
 
+.medium-card-left-column img {
+    width: 2rem;
+}
+
 
 
 .medium-card-maxmin, .rain-and-wind {
@@ -35,7 +39,7 @@
 }
 
 .medium-card-maxmin div:first-child, .rain-and-wind div:first-child {
-    width: 6rem;
+    width: 5rem;
 }
 
 

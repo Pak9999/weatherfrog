@@ -1,9 +1,9 @@
 import React from "react";
 import "./body.css"
 import MainCard from "../components/main-card.tsx"
-import FavoritesList from "../components/favorites-list.tsx";
-import LastViewedList from "../components/last-viewed-list.tsx";
+
 import CompareTemp from "../components/compare-temp.tsx";
+import MediumCardCarousel from "../components/medium-card-carousel.tsx";
 
 
 const Body: React.FC = () => {
@@ -11,8 +11,12 @@ const Body: React.FC = () => {
         <>
             <div className="main-body">
                 <MainCard />
-                <FavoritesList />
-                <LastViewedList />
+                <MediumCardCarousel 
+                carouselType="favorites" 
+                />
+                <MediumCardCarousel 
+                carouselType="recent" 
+                />
                 <CompareTemp />
             </div>
         </>
