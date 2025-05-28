@@ -13,18 +13,36 @@ const MainCard: React.FC = () => {
     return (
         <>
             <div className="main-card-container">
-                <MainCardHead />
+                <MainCardHead 
+                locationName="Hässleholm"
+                country="Sweden"
+                temperature="20"
+                feelsLike="18"
+                weatherIcon="/src/assets/react.svg"
+                weatherType="Slight overcast"
+                maxTemp="25"
+                minTemp="15"
+                />
                 <hr></hr>
-                <MainCardDetails />
+
+                <MainCardDetails 
+                sunrise="07:30"
+                sunset="18:45"
+                precipitation="12"
+                wind="5"
+                humidity="65"
+                uvIndex="3"
+                />
                 <hr></hr>
+
                 <MainCardCarousel 
                 forecastType="hourly"
                 />
                 <hr></hr>
+                
                 <MainCardCarousel 
                 forecastType="weekly"
                 />
-                {/* Add relevant to two above components (hourly + weekly) */}
             </div>
         </>
     );

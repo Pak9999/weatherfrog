@@ -6,29 +6,42 @@
 import React from "react";
 import "./main-card-head.css";
 
-const MainCardHead: React.FC = () => {
+interface MainCardHeadProps {
+    locationName: string;
+    country: string;
+    temperature: string;
+    feelsLike: string;
+    weatherIcon: string;
+    weatherType: string;
+    maxTemp: string;
+    minTemp: string;
+}
+
+
+
+const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherIcon, weatherType, maxTemp, minTemp }) => {
     return (
         <>
             <div className="main-card-header-container">
                 <section className="current-location">
                     <div className="location">
-                        <h3>Your location</h3>
-                        <p>City, Country</p>
+                        <h3>{locationName}</h3>
+                        <p>{country}</p>
                     </div>
                     <div className="temp-and-icon">
                         <div className="temperature">
-                            <h2 className="current-location-temperature">-12°C</h2>
-                            <p>Feels like: -12°C</p>
+                            <h2 className="current-location-temperature">{temperature}°C</h2>
+                            <p>Feels like: {feelsLike}°C</p>
                         </div>
-                        <img src="/src/assets/react.svg" alt="current-weather-icon" className="current-weather-icon"></img>
+                        <img src={weatherIcon} alt="current-weather-icon" className="current-weather-icon"></img>
                     </div>
                     
 
                     <div className="type-and-maxmin">
-                        <h3>Scattered showers</h3>
+                        <h3>{weatherType}</h3>
                         <div className="current-max-min">
-                            <p>max 14°C</p>
-                            <p>min 11°C</p>
+                            <p>max {maxTemp}°C</p>
+                            <p>min {minTemp}°C</p>
                         </div>
                     
                     </div>
