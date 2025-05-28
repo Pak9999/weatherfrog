@@ -8,19 +8,38 @@ import WeeklyCard from "./weekly-card";
 import "./main-card-carousel.css";
 
 
-const MainCardCarousel: React.FC = () => {
+interface MainCardCarouselProps {
+    forecastType: "hourly" | "weekly";
+}
+
+
+const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => {
     return (
         <>
             <div className="main-card-carousel-container">
-                <h3>Title</h3>
+                <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
                 <div className="carousel-test">
-                    <WeeklyCard />
-                    <WeeklyCard />
-                    <WeeklyCard />
-                    <WeeklyCard />
-
+                    {forecastType === "hourly" ? (
+                        <>
+                            <HourlyCard /* Update props */
+                            hour="14:00"
+                            weatherIcon="/src/assets/react.svg"
+                            temperature="20°C"
+                            />
+                            
+                        </>
+                    ) : (
+                        <>
+                            <WeeklyCard /* Update props */
+                            day="Mon"
+                            date="15/02"
+                            weatherIcon="/src/assets/react.svg"
+                            maxTemp="25°C"
+                            minTemp="15°C"
+                            />
+                        </>
+                    )}
                 </div>
-
             </div>
         </>
     );

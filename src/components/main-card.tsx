@@ -17,9 +17,13 @@ const MainCard: React.FC = () => {
                 <hr></hr>
                 <MainCardDetails />
                 <hr></hr>
-                <MainCardCarousel />
+                <MainCardCarousel 
+                forecastType="hourly"
+                />
                 <hr></hr>
-                <MainCardCarousel />
+                <MainCardCarousel 
+                forecastType="weekly"
+                />
                 {/* Add relevant to two above components (hourly + weekly) */}
             </div>
         </>

@@ -5,13 +5,19 @@ import React from "react";
 import "./hourly-card.css";
 
 
-const HourlyCard: React.FC = () => {
+interface HourlyCardProps {
+    hour: string;
+    weatherIcon: string;
+    temperature: string;
+}
+
+const HourlyCard: React.FC<HourlyCardProps> = ({ hour, weatherIcon, temperature}) => {
     return (
         <>
             <div className="hourly-card">
-                <p>12:00</p>
-                <img src="/src/assets/react.svg" alt="weather-icon" className="hourly-weather-icon"></img>
-                <p>15°C</p>
+                <p>{hour}</p>
+                <img src={weatherIcon} alt="weather-icon" className="hourly-weather-icon"></img>
+                <p>{temperature}</p>
             </div>
         </>
     );

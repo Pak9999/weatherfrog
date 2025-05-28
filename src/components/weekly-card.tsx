@@ -5,18 +5,27 @@
 import React from "react";
 import "./weekly-card.css";
 
-const WeeklyCard: React.FC = () => {
+
+interface WeeklyCardProps {
+    day: string;
+    date: string;
+    weatherIcon: string;
+    maxTemp: string;
+    minTemp: string; 
+};
+
+const WeeklyCard: React.FC<WeeklyCardProps> = ({ day, date, weatherIcon, maxTemp, minTemp }) => {
     return (
         <>
             <div className="weekly-card">
-                <p>Mon</p>
-                <p>12/12</p>
-                <img src="/src/assets/react.svg" alt="weather-icon" className="weekly-weather-icon"></img>
-                <p>15°C</p>
-                <p>10°C</p>
+                <p>{day}</p>
+                <p>{date}</p>
+                <img src={weatherIcon} alt="weather-icon" className="weekly-weather-icon"></img>
+                <p>{maxTemp}</p>
+                <p>{minTemp}</p>
             </div>
         </>
     );
-}
+};
 
 export default WeeklyCard;
