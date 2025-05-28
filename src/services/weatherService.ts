@@ -85,38 +85,33 @@ export const fetchHistoricalWeather = async (
   startDate: string,
   endDate: string
 ): Promise<HistoricalWeatherData> => {
-  const params = {
-    latitude: latitude.toString(),
-    longitude: longitude.toString(),
-    start_date: startDate,
-    end_date: endDate,
-    daily: [
-      /* "weathercode",
-      "temperature_2m_max",
-      "temperature_2m_min",
-      "apparent_temperature_max",
-      "apparent_temperature_min", */
-      "temperature_2m_mean" // only one currently used
-      /* "sunrise",
-      "sunset",
-      "precipitation_sum",
-      "rain_sum",
-      "snowfall_sum",
-      "precipitation_hours",
-      "windspeed_10m_max",
-      "windgusts_10m_max",
-      "winddirection_10m_dominant",
-      "shortwave_radiation_sum",
-      "et0_fao_evapotranspiration", */
-    ].join(","),
-    timezone: "auto",
-  };
-  const queryString = new URLSearchParams(params).toString();
-  const response = await fetch(
-    `https://archive-api.open-meteo.com/v1/archive?${queryString}`
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch historical weather data");
-  }
-  return response.json();
+  const response = await axios.get('https://archive-api.open-meteo.com/v1/archive', {
+    params: {
+      latitude,
+      longitude,
+      start_date: startDate,
+      end_date: endDate,
+      daily: [
+        /* "weathercode",
+        "temperature_2m_max",
+        "temperature_2m_min",
+        "apparent_temperature_max",
+        "apparent_temperature_min", */
+        "temperature_2m_mean" // only one currently used
+        /* "sunrise",
+        "sunset",
+        "precipitation_sum",
+        "rain_sum",
+        "snowfall_sum",
+        "precipitation_hours",
+        "windspeed_10m_max",
+        "windgusts_10m_max",
+        "winddirection_10m_dominant",
+        "shortwave_radiation_sum",
+        "et0_fao_evapotranspiration", */
+      ].join(","),
+      timezone: "auto",
+    }
+  });
+  return response.data;
 };
