@@ -1,0 +1,205 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.historical-weather-chart-section {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.historical-weather-chart-container {
+  padding: 10px;
+}
+
+.historical-weather-chart-container h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.historical-weather-chart-container .selected-location-title {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap; 
+}
+
+.controls label {
+  margin-right: 5px;
+}
+
+.controls input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.selected-locations {
+  margin-bottom: 20px;
+}
+
+.selected-locations h4 {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.selected-locations ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px; 
+}
+
+.selected-locations li {
+  background-color: #e7e7e7;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.remove-btn {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 20px; 
+  text-align: center;
+  padding: 0;
+}
+
+.remove-btn:hover {
+  background-color: #e05252;
+}
+
+.chart-wrapper {
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: white;
+  min-height: 300px; 
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid red;
+  background-color: #ffebeb;
+  border-radius: 4px;
+}
+
+.location-search-container { 
+  display: flex;
+  gap: 5px;
+}
+
+.location-search-container input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex-grow: 1; 
+}
+
+.location-search-container button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.location-search-container button:hover {
+  background-color: #0056b3;
+}
+
+.location-suggestions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  position: absolute;
+  z-index: 1000; 
+  width: calc(100% - 22px); 
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.location-suggestions li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.location-suggestions li:last-child {
+  border-bottom: none;
+}
+
+.location-suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+.controls, .selected-locations{
+  color: #333
+}
