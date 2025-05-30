@@ -1,22 +1,36 @@
 .main-card-carousel-container {
     padding: 1rem;
-    width: 100%;
+    width: 99%;
+    justify-content: center;
+
 }
 
 .embla {
     overflow: hidden;
-    width: 90%;
+    width: 100%;
+    position: relative;
 }
 
+.embla__container {
+    display: flex;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 
+}
 
 .embla__slide {
+    position: relative;
     flex: 0 0 auto;
-    min-width: 25px;
-    margin-right: 10px;
-    padding: 0px;
+    width: 120px;
+    margin-right: 1rem;
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    
+    justify-content: center;
+
+}
+
+h3{
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
