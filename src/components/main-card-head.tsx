@@ -57,6 +57,7 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temp
                         <h3>{weatherType}</h3>
                         <div className="current-max-min">
                             <p>max {maxTemp}°C</p>
+                            <p>|</p>
                             <p>min {minTemp}°C</p>
                         </div>
                     

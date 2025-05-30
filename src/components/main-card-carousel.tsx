@@ -22,7 +22,8 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
     const [emblaRef] = useEmblaCarousel({
         align: 'start',
         containScroll: 'trimSnaps',
-        dragFree: true
+        dragFree: true,
+        loop: false
     });
 
     return (

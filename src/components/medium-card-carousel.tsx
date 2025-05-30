@@ -1,8 +1,6 @@
-
-
 import React, { useEffect, useState } from "react";
+import useEmblaCarousel from 'embla-carousel-react';
 import "./medium-card-carousel.css";
-
 import MediumCard from "./medium-card";
 import { getDetailedWeather } from "../services/weatherService"
 import type { WeatherDetailedResponse } from "../types/weather";
@@ -39,28 +37,40 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
         });
     }, [cardData, weatherData]);
 
+    const [emblaRef] = useEmblaCarousel({
+            align: 'start',
+            containScroll: 'trimSnaps',
+            dragFree: true,
+            loop: false
+        });
+    
     return (
         <div className="medium-card-carousel-container">
             <h3>{carouselType === "favorites" ? "Favorites" : "Recent"}</h3>
-            <div className="medium-card-carousel">
-                {cardData.map((card, index) => {
-                    const key = `${card.latitude},${card.longitude}`;
-                    const weather = weatherData[key];
-                    return (
-                        <MediumCard
-                            key={index}
-                            locationName={card.name}
-                            city="Sweden"
-                            temperature={weather ? Math.round(weather.hourly.temperature_2m[0]).toString() : "--"}
-                            weatherIcon="/src/assets/react.svg"
-                            maxTemp={weather ? Math.round(weather.daily.temperature_2m_max[0]).toString() : "--"}
-                            minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
-                            precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
-                            wind={weather ? weather.hourly.wind_speed_100m[0].toString() : "--"}
-
+            <div className="medium-embla" ref={emblaRef}>
+                <div className="medium-embla__container">
+                    
+                    {cardData.map((card, index) => {
+                        const key = `${card.latitude},${card.longitude}`;
+                        const weather = weatherData[key];
+                        return (
+                            <div className="medium-embla__slide">
+                                <MediumCard
+                                    key={index}
+                                    locationName={card.name}
+                                    city="Sweden"
+                                    temperature={weather ? Math.round(weather.hourly.temperature_2m[0]).toString() : "--"}
+                                    weatherIcon="/src/assets/react.svg"
+                                    maxTemp={weather ? Math.round(weather.daily.temperature_2m_max[0]).toString() : "--"}
+                                    minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
+                                    precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
+                                    wind={weather ? weather.hourly.wind_speed_100m[0].toString() : "--"}
+                            
                         />
+                        </div>
                     );
                 })}
+                </div>
             </div>
         </div>
     );
