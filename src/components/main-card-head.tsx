@@ -5,6 +5,7 @@
 
 import React from "react";
 import "./main-card-head.css";
+import { saveFavorite } from "../services/weatherService";
 
 interface MainCardHeadProps {
     locationName: string;
@@ -15,11 +16,26 @@ interface MainCardHeadProps {
     weatherType: string;
     maxTemp: string;
     minTemp: string;
+    longitude: number;
+    latitude: number;
+    onFavoriteAdded?: () => void;
 }
 
 
+const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherIcon, weatherType, maxTemp, minTemp, longitude, latitude, onFavoriteAdded}) => {
+    const handleAddToFavorites = () => {
+        const location = {
+            name: locationName,
+            longitude: longitude,
+            latitude: latitude
+        };
+        saveFavorite(location);
 
-const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherIcon, weatherType, maxTemp, minTemp }) => {
+        if (onFavoriteAdded) {
+            onFavoriteAdded();
+        }
+    }
+
     return (
         <>
             <div className="main-card-header-container">
@@ -44,6 +60,10 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temp
                             <p>min {minTemp}°C</p>
                         </div>
                     
+                    </div>
+                    <div className="gps-and-favorite">
+{/*                         <button onClick={window.location.reload}>GPS<img src="/src/assets/react.svg" alt="gps icon" className="gps-icon"></img></button>
+ */}                        <button onClick={handleAddToFavorites}>FAV<img src="/src/assets/react.svg" alt="star icon" className="star-icon"></img></button>
                     </div>
                 </section>
             </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { searchLocation } from '../services/weatherService';
 import type { GeocodingResponse } from '../types/weather';
 
@@ -13,6 +13,21 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
   const [results, setResults] = useState<GeocodingResponse['results']>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSearch = async () => {
     if (!query.trim()) return;
@@ -23,12 +38,14 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
     try {
       const response = await searchLocation(query);
       setResults(response.results || []);
+      setShowDropdown(response.results && response.results.length > 0);
       if (response.results?.length === 0) {
         setError('No locations found');
       }
     } catch (err) {
       setError('Error searching for location');
       console.error(err);
+      setShowDropdown(false);
     } finally {
       setIsLoading(false);
     }
@@ -41,36 +58,60 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
       longitude: location.longitude
     });
     setResults([]);
+    setShowDropdown(false);
+    setQuery(''); 
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    if (e.target.value.trim() === '') {
+      setResults([]);
+      setShowDropdown(false);
+    }
+  };
+
+  const handleInputFocus = () => {
+    if (results.length > 0) {
+      setShowDropdown(true);
+    }
+  };
+
+  const handleInputBlur = () => {
+    setTimeout(() => {
+      setShowDropdown(false);
+    }, 150);
   };
 
   return (
-    <div>
-      <div className="location-search-card">
+    <div className="location-search-card">
+      <div className="search-input-container" ref={searchContainerRef}>
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           placeholder="Search for a location..."
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
         />
         <button onClick={handleSearch} disabled={isLoading} className='search-button'>
           {isLoading ? 'Searching...' : 'Search'}
         </button>
+        
+        {showDropdown && results.length > 0 && (
+          <ul className="search-results-dropdown">
+            {results.map((location) => (
+              <li key={location.id}>
+                <button onClick={() => handleSelectLocation(location)}>
+                  {location.name}, {location.country}{location.admin1 ? `, ${location.admin1}` : ''}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       
-      {error && <p>{error}</p>}
-      
-      {results.length > 0 && (
-        <ul>
-          {results.map((location) => (
-            <li key={location.id}>
-              <button onClick={() => handleSelectLocation(location)}>
-                {location.name}, {location.country}{location.admin1 ? `, ${location.admin1}` : ''}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      {error && <div className="search-error">{error}</div>}
     </div>
   );
 }

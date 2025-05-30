@@ -10,7 +10,7 @@ import MediumCardCarousel from "../components/medium-card-carousel.tsx";
 import LocationSearch from '../components/location-search.tsx'
 
 import HistoricalWeatherChart from '../components/HistoricalWeatherChart'
-import { getDetailedWeather, getSimpleWeather, getFavorites, getRecentSearches, saveFavorite, saveRecentSearch } from '../services/weatherService'
+import { getDetailedWeather, getSimpleWeather, getFavorites, getRecentSearches, saveRecentSearch } from '../services/weatherService'
 import { getLocationNameFromCoords } from '../utils/geocoderUtil'
 import type { WeatherDetailedResponse, WeatherSimpleResponse } from '../types/weather'
 
@@ -100,17 +100,13 @@ const Body: React.FC = () => {
         setSelectedLocation(location);
     };
 
-
-    const handleAddToFavorites = () => {
-        if (selectedLocation) {
-            saveFavorite(selectedLocation)
-            setFavorites(getFavorites())
-        }
-    }
-
     if (!selectedLocation) {
         return <div>Loading location...</div> // Or some other loading state
     }
+
+    const handleFavoriteAdded = () => {
+    setFavorites(getFavorites()); 
+    };
 
     return (
         <>
@@ -126,6 +122,7 @@ const Body: React.FC = () => {
                     <MainCard 
                         weather={detailedWeather}
                         locationName={selectedLocation.name}
+                        onFavoriteAdded={handleFavoriteAdded}
                 />
                 )}
                 <MediumCardCarousel
@@ -141,71 +138,6 @@ const Body: React.FC = () => {
                     userLongitude={userLongitude || 0}
                     selectedLocation={selectedLocation}
                 />
-            </div>
-            <div className="app-container">
-                <h1>Weather Frog</h1>
-
-                <div className="search-container">
-                    <LocationSearch onLocationSelect={handleLocationSelect} />
-                </div>
-
-                
-
-{/*                 {detailedWeather && selectedLocation && !loading && (
-                    <WeatherDetailedView
-                        weather={detailedWeather}
-                        locationName={selectedLocation.name}
-                    />
-                )}
-
-                {simpleWeather && selectedLocation && !loading && (
-                    <WeatherSimpleView
-                        weather={simpleWeather}
-                        locationName={selectedLocation.name}
-                    />
-                )}
- */}
-                <div className="saved-locations">
-                    {favorites.length > 0 && (
-                        <div className="favorites">
-                            <h3>Favorites</h3>
-                            <ul>
-                                {favorites.map((location, index) => (
-                                    <li key={`fav-${index}`}>
-                                        <button onClick={() => handleLocationSelect(location)}>
-                                            {location.name}
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-
-                    {recentSearches.length > 0 && (
-                        <div className="recent-searches">
-                            <h3>Recent Searches</h3>
-                            <ul>
-                                {recentSearches.map((location, index) => (
-                                    <li key={`recent-${index}`}>
-                                        <button onClick={() => handleLocationSelect(location)}>
-                                            {location.name}
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </div>
-
-                <div className="historical-weather-chart-section">
-                    {userLatitude && userLongitude && (
-                        <HistoricalWeatherChart
-                            initialLatitude={userLatitude}
-                            initialLongitude={userLongitude}
-                            initialLocationName={selectedLocation.name} // Pass the name of the initially selected location
-                        />
-                    )}
-                </div>
             </div>
         </>
     );

@@ -13,9 +13,10 @@ import type { WeatherDetailedResponse } from "../types/weather";
 interface MainCardProps {
     weather: WeatherDetailedResponse
     locationName: string;
+    onFavoriteAdded?: () => void;
 }
 
-const MainCard: React.FC<MainCardProps> = ({ weather, locationName }) => {
+const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAdded }) => {
     return (
         <>
             <div className="main-card-container">
@@ -31,6 +32,9 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName }) => {
                     /* ----- */
                     maxTemp={Math.round(weather.daily.temperature_2m_max[0]).toString()}
                     minTemp={Math.round(weather.daily.temperature_2m_min[0]).toString()}
+                    longitude={weather.longitude}
+                    latitude={weather.latitude}
+                    onFavoriteAdded={onFavoriteAdded}
                 />
                 <hr></hr>
 

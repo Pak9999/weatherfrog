@@ -20,7 +20,7 @@ export const getDetailedWeather = async (latitude: number, longitude: number): P
   const response = await axios.get(`${BASE_URL}/forecast`, {
     params: {
       latitude,
-      longitude,
+      longitude, 
       hourly: 'temperature_2m,apparent_temperature,weather_code,wind_speed_100m,wind_direction_100m,relative_humidity_2m,precipitation',
       daily: 'temperature_2m_min,temperature_2m_max,uv_index_max,sunrise,sunset',
       temperature_unit: 'celsius',
