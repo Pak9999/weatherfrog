@@ -33,7 +33,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
                                 <HourlyCard
                                     hour="14:00"
                                     weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
+                                    temperature="-20°C"
                                 />
                             </div>
                             <div className="embla__slide">
@@ -94,7 +94,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
                                     date="15/02"
                                     weatherIcon="/src/assets/react.svg"
                                     maxTemp="25°C"
-                                    minTemp="15°C"
+                                    minTemp="-15°C"
                                 />
                             </div>
                             <div className="embla__slide">

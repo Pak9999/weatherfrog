@@ -9,6 +9,9 @@
     overflow: hidden;
     width: 100%;
     position: relative;
+    align-content: center;
+    right: 0.90rem;
+    margin-top: 10px;
 }
 
 .embla__container {

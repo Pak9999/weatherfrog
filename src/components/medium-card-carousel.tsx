@@ -27,7 +27,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType })
                                 <MediumCard
                                     locationName="Eslöv"
                                     city="Sweden"
-                                    temperature="20"
+                                    temperature="100"
                                     weatherIcon="/src/assets/react.svg"
                                     maxTemp="25"
                                     minTemp="15"
@@ -66,7 +66,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType })
                                 <MediumCard
                                     locationName="Eslöv"
                                     city="Sweden"
-                                    temperature="20"
+                                    temperature="-50"
                                     weatherIcon="/src/assets/react.svg"
                                     maxTemp="25"
                                     minTemp="15"
