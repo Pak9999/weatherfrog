@@ -17,7 +17,7 @@ const HourlyCard: React.FC<HourlyCardProps> = ({ hour, weatherIcon, temperature}
             <div className="hourly-card">
                 <p>{hour}</p>
                 <img src={weatherIcon} alt="weather-icon" className="hourly-weather-icon"></img>
-                <p>{temperature}</p>
+                <p>{temperature}°C</p>
             </div>
         </>
     );

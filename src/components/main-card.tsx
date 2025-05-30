@@ -6,42 +6,54 @@ import "./main-card.css";
 import MainCardHead from "./main-card-head";
 import MainCardDetails from "./main-card-details-list";
 import MainCardCarousel from "./main-card-carousel";
+import type { WeatherDetailedResponse } from "../types/weather";
 
 
 
-const MainCard: React.FC = () => {
+interface MainCardProps {
+    weather: WeatherDetailedResponse
+    locationName: string;
+}
+
+const MainCard: React.FC<MainCardProps> = ({ weather, locationName }) => {
     return (
         <>
             <div className="main-card-container">
+
                 <MainCardHead 
-                locationName="Hässleholm"
-                country="Sweden"
-                temperature="20"
-                feelsLike="18"
-                weatherIcon="/src/assets/react.svg"
-                weatherType="Slight overcast"
-                maxTemp="25"
-                minTemp="15"
+                    locationName={locationName}
+                    country="Sweden"
+                    temperature={Math.round(weather.hourly.temperature_2m[0]).toString()}
+                    feelsLike={Math.round(weather.hourly.apparent_temperature[0]).toString()}
+                    /* Update 2 below when coded weather codes to weather type */
+                    weatherIcon="/src/assets/react.svg"
+                    weatherType={weather.hourly.weather_code[0].toString()}
+                    /* ----- */
+                    maxTemp={Math.round(weather.daily.temperature_2m_max[0]).toString()}
+                    minTemp={Math.round(weather.daily.temperature_2m_min[0]).toString()}
                 />
                 <hr></hr>
 
                 <MainCardDetails 
-                sunrise="07:30"
-                sunset="18:45"
-                precipitation="12"
-                wind="5"
-                humidity="65"
-                uvIndex="3"
+                    sunrise={weather.daily.sunrise[0].slice(-5)}
+                    sunset={weather.daily.sunset[0].slice(-5)}
+                    precipitation={weather.hourly.precipitation[0].toString()}
+                    wind={weather.hourly.wind_speed_100m[0].toString()}
+                    /* Add wind direction (need to code degrees into NESW) */
+                    humidity={weather.hourly.relative_humidity_2m[0].toString()}
+                    uvIndex={weather.daily.uv_index_max[0].toString()}
                 />
                 <hr></hr>
 
                 <MainCardCarousel 
-                forecastType="hourly"
+                    forecastType="hourly"
+                    weather={weather}
                 />
                 <hr></hr>
                 
                 <MainCardCarousel 
-                forecastType="weekly"
+                    forecastType="weekly"
+                    weather={weather}
                 />
             </div>
         </>

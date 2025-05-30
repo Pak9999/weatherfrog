@@ -10,5 +10,5 @@
     margin-top: 2%;
     border-radius: 5px;
 
-    height: 250px; /* Used just for static testing */
+    height: auto; /* Used just for static testing */
 }

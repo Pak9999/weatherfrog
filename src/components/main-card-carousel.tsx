@@ -8,13 +8,17 @@ import HourlyCard from "./hourly-card";
 
 import "./main-card-carousel.css";
 
+import type { WeatherDetailedResponse } from "../types/weather";
+
 
 interface MainCardCarouselProps {
     forecastType: "hourly" | "weekly";
+    weather: WeatherDetailedResponse;
+    locationName?: string;
 }
 
 
-const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => {
+const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weather }) => {
     const [emblaRef] = useEmblaCarousel({
         align: 'start',
         containScroll: 'trimSnaps',
@@ -22,12 +26,34 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
     });
 
     return (
-        <>
-            <div className="main-card-carousel-container">
-                <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
-                <div className="embla" ref={emblaRef}>
-                    <div className="embla__container">
-                        <div className="embla__slide">
+        <div className="main-card-carousel-container">
+            <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
+            <div className="embla" ref={emblaRef}>
+                <div className="embla__container">
+                    {forecastType === "hourly"
+                        ? weather.hourly.time.slice(0, 12).map((time, idx) => (
+                            <div className="embla__slide" key={time}>
+                                <HourlyCard
+                                    hour={time.slice(-5)}
+                                    weatherIcon="/src/assets/react.svg"
+                                    temperature={Math.round(weather.hourly.temperature_2m[idx]).toString()}
+                                />
+                            </div>
+                        ))
+                        : weather.daily.time.map((date, idx) => (
+                            <div className="embla__slide" key={date}>
+                                <WeeklyCard
+                                    day={new Date(date).toLocaleDateString(undefined, { weekday: 'short' })}
+                                    date={date.slice(5)}
+                                    weatherIcon="/src/assets/react.svg"
+                                    maxTemp={Math.round(weather.daily.temperature_2m_max[idx]).toString()}
+                                    minTemp={Math.round(weather.daily.temperature_2m_min[idx]).toString()}
+                                />
+                            </div>
+                        ))
+                    }
+
+                    {/*                         <div className="embla__slide">
                             {forecastType === "hourly" ? (
                                 <>
                                     <HourlyCard
@@ -35,75 +61,11 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
                                     weatherIcon="/src/assets/react.svg"
                                     temperature="20°C"
                                     />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
-                                    <HourlyCard
-                                    hour="14:00"
-                                    weatherIcon="/src/assets/react.svg"
-                                    temperature="20°C"
-                                    />
+                                
                                 </>
                             ) : ( 
                                 <>
-                                    <WeeklyCard /* Update props */
+                                    <WeeklyCard 
                                         day="Mon"
                                         date="15/02"
                                         weatherIcon="/src/assets/react.svg"
@@ -113,12 +75,12 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType }) => 
                                 </>
                             )
                             }
-                        </div>
-                    </div>
+                        </div> */}
                 </div>
             </div>
-        </>
+        </div>
     );
+
 }
 
 export default MainCardCarousel;

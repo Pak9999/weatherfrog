@@ -8,7 +8,7 @@ import { getDetailedWeather, getSimpleWeather, getFavorites, getRecentSearches, 
 import { getLocationNameFromCoords } from './utils/geocoderUtil'
 import type { WeatherDetailedResponse, WeatherSimpleResponse } from './types/weather'
 
-function App() {
+function ApiApp() {
   const [selectedLocation, setSelectedLocation] = useState<{ name: string, latitude: number, longitude: number } | null>(null)
   const [detailedWeather, setDetailedWeather] = useState<WeatherDetailedResponse | null>(null)
   const [simpleWeather, setSimpleWeather] = useState<WeatherSimpleResponse | null>(null)
@@ -210,4 +210,4 @@ function App() {
   )
 }
 
-export default App
+export default ApiApp

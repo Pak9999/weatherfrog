@@ -4,6 +4,9 @@
 
 import React from "react";
 import "./medium-card.css";
+import { setSelectedLocation } from "../state/locationState"; // Adjust the import based on your state management solution
+
+
 
 interface MediumCardProps {
     locationName: string;
@@ -14,13 +17,18 @@ interface MediumCardProps {
     minTemp: string;
     precipitation: string;
     wind: string;
+    longitude: number;
+    latitude: number;
 }
 
+const handleLocationClick = (location: {locationName: string, longitude: number, latitude: number}) => {
+    setSelectedLocation(location)
+}
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, maxTemp, minTemp, precipitation, wind }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, maxTemp, minTemp, precipitation, wind,  }) => {
     return (
         <>
-            <div className="medium-card">
+            <div className="medium-card" onClick={() => handleLocationClick(location)} style={{cursor: "pointer"}}>
                 <div className="medium-card-container">
                     <div className="medium-card-left-column">
                         <div className="medium-card-location">

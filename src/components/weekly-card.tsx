@@ -21,8 +21,8 @@ const WeeklyCard: React.FC<WeeklyCardProps> = ({ day, date, weatherIcon, maxTemp
                 <p>{day}</p>
                 <p>{date}</p>
                 <img src={weatherIcon} alt="weather-icon" className="weekly-weather-icon"></img>
-                <p>{maxTemp}</p>
-                <p>{minTemp}</p>
+                <p>{maxTemp}°C</p>
+                <p>{minTemp}°C</p>
             </div>
         </>
     );

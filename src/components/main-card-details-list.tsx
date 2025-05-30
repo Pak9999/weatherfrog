@@ -34,7 +34,7 @@ const MainCardDetails: React.FC<MainCardDetailsProps> = ({ sunrise, sunset, prec
                         <tr className="precipitation">
                             <td><img src="/src/assets/react.svg" alt="umbrella icon"></img></td>
                             <td><p>Precipitation</p></td>
-                            <td><p>{precipitation}</p></td>
+                            <td><p>{precipitation} mm</p></td>
                         </tr>
                         <tr className="wind">
                             <td><img src="/src/assets/react.svg" alt="wind icon"></img></td>
@@ -48,7 +48,7 @@ const MainCardDetails: React.FC<MainCardDetailsProps> = ({ sunrise, sunset, prec
                         </tr>
                         <tr className="uv-index">
                             <td><img src="/src/assets/react.svg" alt="uv-index icon"></img></td>
-                            <td><p>UV Index</p></td>
+                            <td><p>Max UV Index</p></td>
                             <td><p>{uvIndex}</p></td>
                         </tr>
                     </tbody>
