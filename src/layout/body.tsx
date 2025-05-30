@@ -7,9 +7,8 @@ import CompareTemp from "../components/compare-temp.tsx";
 import MediumCardCarousel from "../components/medium-card-carousel.tsx";
 
 
-import LocationSearch from '../components/LocationSearch'
-import WeatherDetailedView from '../components/WeatherDetailedView'
-import WeatherSimpleView from '../components/WeatherSimpleView'
+import LocationSearch from '../components/location-search.tsx'
+
 import HistoricalWeatherChart from '../components/HistoricalWeatherChart'
 import { getDetailedWeather, getSimpleWeather, getFavorites, getRecentSearches, saveFavorite, saveRecentSearch } from '../services/weatherService'
 import { getLocationNameFromCoords } from '../utils/geocoderUtil'
@@ -116,6 +115,9 @@ const Body: React.FC = () => {
     return (
         <>
             <div className="main-body">
+                <div className="search-container">
+                    <LocationSearch onLocationSelect={handleLocationSelect} />
+                </div>
 
                 {loading && <p>Loading weather data...</p>}
                 {error && <p className="error">{error}</p>}

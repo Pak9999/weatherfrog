@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import LocationSearch from './components/LocationSearch'
+import LocationSearch from './components/location-search'
 import WeatherDetailedView from './components/WeatherDetailedView'
 import WeatherSimpleView from './components/WeatherSimpleView'
 import HistoricalWeatherChart from './components/HistoricalWeatherChart'

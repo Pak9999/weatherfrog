@@ -1,0 +1,23 @@
+
+
+
+.location-search-card {
+    background-color: rgb(239, 241, 241);
+    width: 96%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+    margin-top: 2%;
+    border-radius: 5px;
+}
+
+.search-button {
+    background-color: #3B324C;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 1rem;
+}

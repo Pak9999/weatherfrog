@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { searchLocation } from '../services/weatherService';
 import type { GeocodingResponse } from '../types/weather';
 
+import './location-search.css';
+
 interface LocationSearchProps {
   onLocationSelect: (location: { name: string, latitude: number, longitude: number }) => void;
 }
@@ -43,7 +45,7 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
 
   return (
     <div>
-      <div>
+      <div className="location-search-card">
         <input
           type="text"
           value={query}
@@ -51,7 +53,7 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
           placeholder="Search for a location..."
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
         />
-        <button onClick={handleSearch} disabled={isLoading}>
+        <button onClick={handleSearch} disabled={isLoading} className='search-button'>
           {isLoading ? 'Searching...' : 'Search'}
         </button>
       </div>

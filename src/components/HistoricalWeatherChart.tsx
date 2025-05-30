@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 import { fetchHistoricalWeather } from '../services/weatherService';
 import type { HistoricalWeatherData, HistoricalWeatherLocation } from '../types/weather';
-import LocationSearch from './LocationSearch';
+import LocationSearch from './location-search';
 import { reverseGeocode } from '../utils/geocoderUtil';
 
 ChartJS.register(

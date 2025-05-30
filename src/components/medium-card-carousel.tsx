@@ -5,8 +5,8 @@ import "./medium-card-carousel.css";
 
 import MediumCard from "./medium-card";
 import { getDetailedWeather } from "../services/weatherService"
-/* import { WeatherDetailedResponse } from "../types/weather"
- */
+import type { WeatherDetailedResponse } from "../types/weather";
+
 
 interface MediumCardCarouselProps {
     carouselType: "favorites" | "recent";
@@ -33,7 +33,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                     const data = await getDetailedWeather(card.latitude, card.longitude);
                     setWeatherData(prev => ({ ...prev, [key]: data }));
                 } catch {
-                    setWeatherData(prec => ({ ...prev, [key]: null }));
+                    setWeatherData(prev => ({ ...prev, [key]: null }));
                 }
             }
         });
@@ -57,9 +57,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                             minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
                             precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
                             wind={weather ? weather.hourly.wind_speed_100m[0].toString() : "--"}
-                            longitude={cardData.longitude}
-                            latitude={cardData.latitude}
-                            
+
                         />
                     );
                 })}
