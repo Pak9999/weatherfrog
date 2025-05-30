@@ -9,18 +9,15 @@ import MediumCardCarousel from "../components/medium-card-carousel.tsx";
 
 import LocationSearch from '../components/location-search.tsx'
 
-import HistoricalWeatherChart from '../components/HistoricalWeatherChart'
-import { getDetailedWeather, getSimpleWeather, getFavorites, getRecentSearches, saveRecentSearch } from '../services/weatherService'
+import { getDetailedWeather, getFavorites, getRecentSearches, saveRecentSearch } from '../services/weatherService'
 import { getLocationNameFromCoords } from '../utils/geocoderUtil'
-import type { WeatherDetailedResponse, WeatherSimpleResponse } from '../types/weather'
+import type { WeatherDetailedResponse } from '../types/weather'
 
 
 
 const Body: React.FC = () => {
     const [selectedLocation, setSelectedLocation] = useState<{ name: string, latitude: number, longitude: number } | null>(null)
     const [detailedWeather, setDetailedWeather] = useState<WeatherDetailedResponse | null>(null)
-    const [simpleWeather, setSimpleWeather] = useState<WeatherSimpleResponse | null>(null)
-    const [viewType, setViewType] = useState<'simple' | 'detailed'>('simple')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [favorites, setFavorites] = useState<Array<{ name: string, latitude: number, longitude: number }>>([])
@@ -87,8 +84,8 @@ const Body: React.FC = () => {
                 // Save to recent searches
                 saveRecentSearch(selectedLocation);
                 setRecentSearches(getRecentSearches());
-            } catch (err) {
-                setError('Failed to fetch weather data');
+            } catch(err) {
+                console.error("Error fetching weather data:", err);
             } finally {
                 setLoading(false);
             }
@@ -101,7 +98,7 @@ const Body: React.FC = () => {
     };
 
     if (!selectedLocation) {
-        return <div>Loading location...</div> // Or some other loading state
+        return <div>Loading location...</div> 
     }
 
     const handleFavoriteAdded = () => {
