@@ -16,8 +16,6 @@
     padding-top: 2rem;
     justify-content: center;
     padding-right: 30%;
-
-
 }
 
 .header-content > a {
@@ -33,4 +31,9 @@
     margin: 0;
     padding: 0px;
     line-height: 1.2rem;  /* Minskar avståndet mellan raderna */
+}
+
+.WF{
+    width: 30px;
+    height: 30px;
 }

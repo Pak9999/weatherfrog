@@ -22,7 +22,7 @@ export const getDetailedWeather = async (latitude: number, longitude: number): P
       latitude,
       longitude, 
       hourly: 'temperature_2m,apparent_temperature,weather_code,wind_speed_100m,wind_direction_100m,relative_humidity_2m,precipitation',
-      daily: 'temperature_2m_min,temperature_2m_max,uv_index_max,sunrise,sunset',
+      daily: 'temperature_2m_min,temperature_2m_max,uv_index_max,sunrise,sunset,weather_code',
       temperature_unit: 'celsius',
       wind_speed_unit: 'ms',
       timezone: 'auto'
@@ -61,14 +61,12 @@ export const getFavorites = (): Array<{ name: string, latitude: number, longitud
 export const saveRecentSearch = (location: { name: string, latitude: number, longitude: number }): void => {
   const recentSearches = getRecentSearches();
   
-  // Remove if already exists
   const filtered = recentSearches.filter(
     search => !(search.latitude === location.latitude && search.longitude === location.longitude)
   );
   
   filtered.unshift(location);
   
-  // Only keep the most recent 5 searches
   const trimmed = filtered.slice(0, 5);
   
   localStorage.setItem('recentSearches', JSON.stringify(trimmed));

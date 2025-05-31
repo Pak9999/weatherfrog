@@ -22,32 +22,32 @@ const MainCardDetails: React.FC<MainCardDetailsProps> = ({ sunrise, sunset, prec
                 <table className="main-card-details">
                     <tbody>
                         <tr className="sunrise">
-                            <td><img src="/src/assets/react.svg" alt="sunrise icon"></img></td>
+                            <td><img src="/src/assets/sunrise.svg" alt="sunrise icon"></img></td>
                             <td><p>Sunrise</p></td>
                             <td><p>{sunrise}</p></td>
                         </tr>
                         <tr className="sunset">
-                            <td><img src="/src/assets/react.svg" alt="sunset icon"></img></td>
+                            <td><img className="sun" src="/src/assets/sunset.svg" alt="sunset icon"></img></td>
                             <td><p>Sunset</p></td>
                             <td><p>{sunset}</p></td>
                         </tr>
                         <tr className="precipitation">
-                            <td><img src="/src/assets/react.svg" alt="umbrella icon"></img></td>
+                            <td><img src="src/assets/v4/umbrella.svg" alt="umbrella icon"></img></td>
                             <td><p>Precipitation</p></td>
                             <td><p>{precipitation} mm</p></td>
                         </tr>
                         <tr className="wind">
-                            <td><img src="/src/assets/react.svg" alt="wind icon"></img></td>
+                            <td><img src="src/assets/v4/windy.svg" alt="wind icon"></img></td>
                             <td><p>Wind</p></td>
                             <td><p>{wind} m/s</p></td>
                         </tr>
                         <tr className="humidity">
-                            <td><img src="/src/assets/react.svg" alt="humidity icon"></img></td>
+                            <td><img src="src/assets/humidity.svg" alt="humidity icon"></img></td>
                             <td><p>Humidity</p></td>
                             <td><p>{humidity}%</p></td>
                         </tr>
                         <tr className="uv-index">
-                            <td><img src="/src/assets/react.svg" alt="uv-index icon"></img></td>
+                            <td><img className="humidity" src="src/assets/v4/clear_day.svg" alt="uv-index icon"></img></td>
                             <td><p>Max UV Index</p></td>
                             <td><p>{uvIndex}</p></td>
                         </tr>

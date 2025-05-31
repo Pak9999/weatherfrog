@@ -18,6 +18,7 @@ export interface WeatherDetailedResponse {
     uv_index_max: number[];
     sunrise: string[];
     sunset: string[];
+    weather_code: number[];
   };
 }
 

@@ -6,6 +6,7 @@
 import React from "react";
 import "./main-card-head.css";
 import { saveFavorite } from "../services/weatherService";
+import { getWeatherIcon, getWeatherDescription } from "../utils/weatherUtils";
 
 interface MainCardHeadProps {
     locationName: string;
@@ -22,7 +23,7 @@ interface MainCardHeadProps {
 }
 
 
-const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherIcon, weatherType, maxTemp, minTemp, longitude, latitude, onFavoriteAdded}) => {
+const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, onFavoriteAdded}) => {
     const handleAddToFavorites = () => {
         const location = {
             name: locationName,
@@ -49,12 +50,12 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temp
                             <h2 className="current-location-temperature">{temperature}°C</h2>
                             <p>Feels like: {feelsLike}°C</p>
                         </div>
-                        <img src={weatherIcon} alt="current-weather-icon" className="current-weather-icon"></img>
+                        <img src={getWeatherIcon(parseInt(weatherType), true)} alt="current-weather-icon" className="current-weather-icon"></img>
                     </div>
                     
 
                     <div className="type-and-maxmin">
-                        <h3>{weatherType}</h3>
+                        <h3>{getWeatherDescription(parseInt(weatherType))}</h3>
                         <div className="current-max-min">
                             <p>max {maxTemp}°C</p>
                             <p>|</p>
@@ -63,8 +64,7 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temp
                     
                     </div>
                     <div className="gps-and-favorite">
-{/*                         <button onClick={window.location.reload}>GPS<img src="/src/assets/react.svg" alt="gps icon" className="gps-icon"></img></button>
- */}                        <button onClick={handleAddToFavorites}>FAV<img src="/src/assets/react.svg" alt="star icon" className="star-icon"></img></button>
+                        <button onClick={handleAddToFavorites}> <img className="star-icon" src="src/assets/star-icon.svg" alt="star-icon" />Favorite</button>
                     </div>
                 </section>
             </div>

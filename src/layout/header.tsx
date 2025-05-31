@@ -6,8 +6,7 @@ const Header: React.FC = () => {
         <>
             <header className="header-bg">
                 <section className="header-content">
-                    <a href="#"><h1>Wetterfrosch</h1></a>
-                    <img src="#" alt="frog icon"></img>
+                    <a href="/"><h1>Wetterfr<img className="WF" src="src/assets/WF_logo.webp" alt="frog icon"></img>sch</h1></a>
                 </section>
             </header>
         </>

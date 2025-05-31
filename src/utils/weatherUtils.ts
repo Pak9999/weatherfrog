@@ -7,7 +7,6 @@ import partlyCloudyDay from '../assets/v4/partly_cloudy_day.svg';
 import partlyCloudyNight from '../assets/v4/partly_cloudy_night.svg';
 import mostlyCloudyDay from '../assets/v4/mostly_cloudy_day.svg';
 import mostlyCloudyNight from '../assets/v4/mostly_cloudy_night.svg';
-//import cloudy from '../assets/v4/cloudy.svg';
 import fog from '../assets/v4/haze_fog_dust_smoke.svg';
 import drizzle from '../assets/v4/drizzle.svg';
 import rainWithSunnyLight from '../assets/v4/rain_with_sunny_light.svg';
@@ -25,6 +24,8 @@ import mixedRainSnow from '../assets/v4/mixed_rain_snow.svg';
 import sleetHail from '../assets/v4/sleet_hail.svg';
 import thunderstormDay from '../assets/v4/isolated_scattered_thunderstorms_day.svg';
 import thunderstormNight from '../assets/v4/isolated_scattered_thunderstorms_night.svg';
+import frog from '/src/assets/WF_logo.webp';
+
 
 export const getWeatherIcon = (weatherCode: number, isDay: boolean = true): string => {
     const iconMap: { [key: number]: { day: string; night: string; description: string } } = {
@@ -59,7 +60,7 @@ export const getWeatherIcon = (weatherCode: number, isDay: boolean = true): stri
     };
     
     const weather = iconMap[weatherCode];
-    if (!weather) return fog; // Använder fog som fallback 
+    if (!weather) return frog; // Använder frog som fallback 
     
     return isDay ? weather.day : weather.night;
 };

@@ -81,6 +81,13 @@
     font-weight: 500;
 }
 
+.star-icon{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
 
 @media screen and (max-width: 660px) {
     .type-and-maxmin {
