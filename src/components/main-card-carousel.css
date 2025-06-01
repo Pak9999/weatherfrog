@@ -11,7 +11,7 @@
     position: relative;
     align-content: center;
     right: 0.90rem;
-    margin-top: 10px;
+    margin-top: 1rem;
 }
 
 .embla__container {
@@ -27,7 +27,6 @@
 .embla__slide {
     position: relative;
     flex: 0 0 auto;
-    width: 120px;
     margin-right: 1rem;
     display: flex;
     justify-content: center;
