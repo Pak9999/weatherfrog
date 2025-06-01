@@ -5,6 +5,8 @@
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.297);
     position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .remove-button {

@@ -47,7 +47,8 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
             <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
             <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
-                    {forecastType === "hourly"                        ? getNext12Hours().map((time, relativeIdx) => {
+                    {forecastType === "hourly"                        
+                    ? getNext12Hours().map((time, relativeIdx) => {
                             const absoluteIdx = getCurrentHourIndex() + relativeIdx;
                             return (
                                 <div className="embla__slide" key={time}>

@@ -25,7 +25,7 @@ interface MediumCardProps {
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove }) => {
     return (
         <>
             <div className="medium-card">

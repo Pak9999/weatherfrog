@@ -25,7 +25,6 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
     const [weatherData, setWeatherData] = useState<CardWeather>({});
 
     useEffect(() => {
-        console.log("Fetching weather data for cards:", cardData);
         cardData.forEach(async (card) => {
             const key = `${card.latitude},${card.longitude}`;
             if (!weatherData[key]) {
