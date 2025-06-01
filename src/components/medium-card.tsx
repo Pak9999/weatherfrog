@@ -16,14 +16,24 @@ interface MediumCardProps {
     minTemp: string;
     precipitation: string;
     wind: string;
-
+    showRemoveButton?: boolean;
+    onRemove?: () => void;
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, maxTemp, minTemp, precipitation, wind }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
     return (
         <>
             <div className="medium-card">
+                {showRemoveButton && (
+                    <button 
+                        className="remove-button" 
+                        onClick={onRemove}
+                        aria-label="Remove from favorites"
+                    >
+                        ×
+                    </button>
+                )}
                 <div className="medium-card-container">
                     <div className="medium-card-left-column">
                         <div className="medium-card-location">

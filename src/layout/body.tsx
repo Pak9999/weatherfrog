@@ -9,7 +9,7 @@ import MediumCardCarousel from "../components/medium-card-carousel.tsx";
 
 import LocationSearch from '../components/location-search.tsx'
 
-import { getDetailedWeather, getFavorites, getRecentSearches, saveRecentSearch } from '../services/weatherService'
+import { getDetailedWeather, getFavorites, getRecentSearches, saveRecentSearch, removeFavorite } from '../services/weatherService'
 import { getLocationNameFromCoords } from '../utils/geocoderUtil'
 import type { WeatherDetailedResponse } from '../types/weather'
 
@@ -104,6 +104,11 @@ const Body: React.FC = () => {
     setFavorites(getFavorites()); 
     };
 
+    const handleRemoveFavorite = (location: { name: string, latitude: number, longitude: number }) => {
+        removeFavorite(location);
+        setFavorites(getFavorites());
+    };
+
     return (
         <>
             <div className="main-body">
@@ -120,10 +125,10 @@ const Body: React.FC = () => {
                         locationName={selectedLocation.name}
                         onFavoriteAdded={handleFavoriteAdded}
                 />
-                )}
-                <MediumCardCarousel
+                )}                <MediumCardCarousel
                     carouselType="favorites"
                     cardData={favorites}
+                    onRemoveFavorite={handleRemoveFavorite}
                 />
                 <MediumCardCarousel
                     carouselType="recent"

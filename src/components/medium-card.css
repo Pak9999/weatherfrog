@@ -4,6 +4,35 @@
     background-color: rgb(249, 249, 249);
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.297);
+    position: relative;
+}
+
+.remove-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(59, 50, 76, 0.85);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.remove-button:hover {
+    background-color: #3B324C;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .medium-card-container {

@@ -13,6 +13,7 @@ interface MediumCardCarouselProps {
         longitude: number;
         latitude: number;
     }>;
+    onRemoveFavorite?: (location: { name: string, latitude: number, longitude: number }) => void;
 }
 
 interface CardWeather {
@@ -20,7 +21,7 @@ interface CardWeather {
 }
 
 
-const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, cardData }) => {
+const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, cardData, onRemoveFavorite }) => {
     const [weatherData, setWeatherData] = useState<CardWeather>({});
 
     useEffect(() => {
@@ -53,8 +54,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                     {cardData.map((card, index) => {
                         const key = `${card.latitude},${card.longitude}`;
                         const weather = weatherData[key];
-                        return (
-                            <div className="medium-embla__slide">
+                        return (                            <div className="medium-embla__slide">
                                 <MediumCard
                                     key={index}
                                     locationName={card.name}
@@ -65,9 +65,10 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                                     minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
                                     precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
                                     wind={weather ? weather.hourly.wind_speed_100m[0].toString() : "--"}
-                            
-                        />
-                        </div>
+                                    showRemoveButton={carouselType === "favorites"}
+                                    onRemove={() => onRemoveFavorite && onRemoveFavorite(card)}
+                                />
+                            </div>
                     );
                 })}
                 </div>

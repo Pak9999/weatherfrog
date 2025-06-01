@@ -58,6 +58,21 @@ export const getFavorites = (): Array<{ name: string, latitude: number, longitud
   return favorites ? JSON.parse(favorites) : [];
 };
 
+export const removeFavorite = (location: { name: string, latitude: number, longitude: number }): void => {
+  const favorites = getFavorites();
+  const tolerance = 0.0001; 
+  
+  const filteredFavorites = favorites.filter(fav => {
+    const latDiff = Math.abs(fav.latitude - location.latitude);
+    const lonDiff = Math.abs(fav.longitude - location.longitude);
+    
+    
+    return latDiff > tolerance || lonDiff > tolerance;
+  });
+  
+  localStorage.setItem('favorites', JSON.stringify(filteredFavorites));
+};
+
 export const saveRecentSearch = (location: { name: string, latitude: number, longitude: number }): void => {
   const recentSearches = getRecentSearches();
   
