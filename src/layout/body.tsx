@@ -42,11 +42,12 @@ const Body: React.FC = () => {
                     // Try to get location name using reverse geocoding
                     try {
                         const geoData = await getLocationNameFromCoords(latitude, longitude);
-                        const locationName = geoData.city || geoData.state || geoData.displayName.split(',')[0];
+                        const city = geoData.city || geoData.state || geoData.displayName.split(',')[0];
+                        const country = geoData.country || "";
                         setSelectedLocation({
                             latitude,
                             longitude,
-                            name: locationName || "Current Location"
+                            name: country ? `${city}, ${country}` : city || "Current Location"
                         });
                     } catch (geoError) {
                         console.error("Error getting location name:", geoError);
