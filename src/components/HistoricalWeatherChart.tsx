@@ -16,6 +16,8 @@ import type { HistoricalWeatherData, HistoricalWeatherLocation } from '../types/
 import LocationSearch from './location-search';
 import { reverseGeocode } from '../utils/geocoderUtil';
 
+import './HistoricalWeatherChart.css';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,

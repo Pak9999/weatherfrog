@@ -11,29 +11,27 @@
 .header-content {
     display: flex;
     flex-direction: row;
-    margin: 0 10%;
     color:ghostwhite;
     padding-top: 2rem;
-    justify-content: center;
-    padding-right: 30%;
+    width: 96%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .header-content > a {
     color:ghostwhite;
+    display: flex;
+    flex: row;
+    align-items: center;
 }
 
-.current-max-min {
-    margin-top: 0.5rem;
-    padding: 0px;
-}
 
-.current-max-min p {
-    margin: 0;
-    padding: 0px;
-    line-height: 1.2rem;  /* Minskar avståndet mellan raderna */
-}
 
 .WF{
-    width: 30px;
-    height: 30px;
+    height: 2rem;
+    margin-top: 0.75rem;
+    margin-left: 0.2rem;
+    rotate: 20deg;
 }
