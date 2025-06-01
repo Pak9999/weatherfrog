@@ -61,6 +61,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                                     city="Sweden"
                                     temperature={weather ? Math.round(weather.hourly.temperature_2m[0]).toString() : "--"}
                                     weatherIcon={weather ? weather.hourly.weather_code[0].toString() : "0"}
+                                    weatherType={weather ? weather.hourly.weather_code[0].toString() : "0"}
                                     maxTemp={weather ? Math.round(weather.daily.temperature_2m_max[0]).toString() : "--"}
                                     minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
                                     precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
