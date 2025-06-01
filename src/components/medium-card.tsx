@@ -4,7 +4,7 @@
 
 import React from "react";
 import "./medium-card.css";
-import { getWeatherIcon, getWeatherDescription } from "../utils/weatherUtils";
+import { getWeatherIcon, getWeatherDescription, isDay } from "../utils/weatherUtils";
 
 
 interface MediumCardProps {
@@ -17,12 +17,15 @@ interface MediumCardProps {
     minTemp: string;
     precipitation: string;
     wind: string;
+    currentTime?: string;
+    sunrise?: string;
+    sunset?: string;
     showRemoveButton?: boolean;
     onRemove?: () => void;
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove }) => {
     return (
         <>
             <div className="medium-card">
@@ -66,7 +69,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature
                         </div>
                     </div>
                     <div className="medium-card-right-column">
-                        <img src={getWeatherIcon(Number(weatherIcon))} alt={`${getWeatherDescription(parseInt(weatherType))} weather icon`} className="medium-card-weather-icon"></img>
+                        <img src={getWeatherIcon(Number(weatherIcon), currentTime && sunrise && sunset ? isDay(currentTime, sunrise, sunset) : undefined)} alt={`${getWeatherDescription(parseInt(weatherType))} weather icon`} className="medium-card-weather-icon"></img>
                     </div>
                 </div>
                 

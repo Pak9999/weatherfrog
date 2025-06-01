@@ -5,7 +5,7 @@ import React from "react";
 import useEmblaCarousel from 'embla-carousel-react';
 import WeeklyCard from "./weekly-card";
 import HourlyCard from "./hourly-card";
-import { getWeatherIcon } from "../utils/weatherUtils";
+import { getWeatherIcon, isDay } from "../utils/weatherUtils";
 
 import "./main-card-carousel.css";
 
@@ -18,18 +18,12 @@ interface MainCardCarouselProps {
 }
 
 
-const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weather }) => {
-    const [emblaRef] = useEmblaCarousel({
+const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weather }) => {    const [emblaRef] = useEmblaCarousel({
         align: 'start',
         containScroll: 'trimSnaps',
         dragFree: true,
         loop: false
     });
-
-    const isDay = (time: string): boolean => {
-        const hour = new Date(time).getHours();
-        return hour >= 6 && hour < 20;
-    };
 
     const getCurrentHourIndex = (): number => {
         const now = new Date();
@@ -53,8 +47,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
             <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
             <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
-                    {forecastType === "hourly"
-                        ? getNext12Hours().map((time, relativeIdx) => {
+                    {forecastType === "hourly"                        ? getNext12Hours().map((time, relativeIdx) => {
                             const absoluteIdx = getCurrentHourIndex() + relativeIdx;
                             return (
                                 <div className="embla__slide" key={time}>
@@ -62,7 +55,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
                                     /* Must update this -- right now breaks when updating (searching) location to one that is one date ahead */
                                     /* !!!!!!!!  */
                                         hour={time.slice(-5)}
-                                        weatherIcon={getWeatherIcon(weather.hourly.weather_code[absoluteIdx], isDay(time))}
+                                        weatherIcon={getWeatherIcon(weather.hourly.weather_code[absoluteIdx], isDay(time, weather.daily.sunrise[0], weather.daily.sunset[0]))}
                                         weatherType={weather.hourly.weather_code[absoluteIdx].toString()}
                                         temperature={Math.round(weather.hourly.temperature_2m[absoluteIdx]).toString()}
                                     />
