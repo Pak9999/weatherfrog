@@ -25,6 +25,8 @@
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
     margin-left: 20px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .medium-embla__slide {
