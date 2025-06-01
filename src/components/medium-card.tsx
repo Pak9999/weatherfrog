@@ -4,7 +4,7 @@
 
 import React from "react";
 import "./medium-card.css";
-import { getWeatherIcon } from "../utils/weatherUtils";
+import { getWeatherIcon, getWeatherDescription } from "../utils/weatherUtils";
 
 
 interface MediumCardProps {
@@ -12,6 +12,7 @@ interface MediumCardProps {
     city: string;
     temperature: string;
     weatherIcon: string;
+    weatherType: string;
     maxTemp: string;
     minTemp: string;
     precipitation: string;
@@ -21,7 +22,7 @@ interface MediumCardProps {
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
     return (
         <>
             <div className="medium-card">
@@ -65,7 +66,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature
                         </div>
                     </div>
                     <div className="medium-card-right-column">
-                        <img src={getWeatherIcon(Number(weatherIcon))} alt="weather-icon" className="medium-card-weather-icon"></img>
+                        <img src={getWeatherIcon(Number(weatherIcon))} alt={`${getWeatherDescription(parseInt(weatherType))} weather icon`} className="medium-card-weather-icon"></img>
                     </div>
                 </div>
                 

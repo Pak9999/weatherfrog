@@ -59,8 +59,11 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
                             return (
                                 <div className="embla__slide" key={time}>
                                     <HourlyCard
+                                    /* Must update this -- right now breaks when updating (searching) location to one that is one date ahead */
+                                    /* !!!!!!!!  */
                                         hour={time.slice(-5)}
                                         weatherIcon={getWeatherIcon(weather.hourly.weather_code[absoluteIdx], isDay(time))}
+                                        weatherType={weather.hourly.weather_code[absoluteIdx].toString()}
                                         temperature={Math.round(weather.hourly.temperature_2m[absoluteIdx]).toString()}
                                     />
                                 </div>
@@ -72,6 +75,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
                                     day={new Date(date).toLocaleDateString(undefined, { weekday: 'short' })}
                                     date={date.slice(5)}
                                     weatherIcon={getWeatherIcon(weather.daily.weather_code[idx], true)}
+                                    weatherType={weather.daily.weather_code[idx].toString()}
                                     maxTemp={Math.round(weather.daily.temperature_2m_max[idx]).toString()}
                                     minTemp={Math.round(weather.daily.temperature_2m_min[idx]).toString()}
                                 />

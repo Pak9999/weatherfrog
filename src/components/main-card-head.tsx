@@ -50,7 +50,7 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temp
                             <h2 className="current-location-temperature">{temperature}°C</h2>
                             <p>Feels like: {feelsLike}°C</p>
                         </div>
-                        <img src={getWeatherIcon(parseInt(weatherType), true)} alt="current-weather-icon" className="current-weather-icon"></img>
+                        <img src={getWeatherIcon(parseInt(weatherType), true)} alt={`${getWeatherDescription(parseInt(weatherType))} weather icon`} className="current-weather-icon"></img>
                     </div>
                     
 
