@@ -6,7 +6,7 @@
 import React from "react";
 import "./main-card-head.css";
 import { saveFavorite } from "../services/weatherService";
-import { getWeatherIcon, getWeatherDescription } from "../utils/weatherUtils";
+import { getWeatherIcon, getWeatherDescription, isDay } from "../utils/weatherUtils";
 
 interface MainCardHeadProps {
     locationName: string;
@@ -19,11 +19,14 @@ interface MainCardHeadProps {
     minTemp: string;
     longitude: number;
     latitude: number;
+    currentTime: string;
+    sunrise: string;
+    sunset: string;
     onFavoriteAdded?: () => void;
 }
 
 
-const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, onFavoriteAdded}) => {
+const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, currentTime, sunrise, sunset, onFavoriteAdded}) => {
     const handleAddToFavorites = () => {
         const location = {
             name: locationName,
@@ -50,7 +53,7 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temp
                             <h2 className="current-location-temperature">{temperature}°C</h2>
                             <p>Feels like: {feelsLike}°C</p>
                         </div>
-                        <img src={getWeatherIcon(parseInt(weatherType), true)} alt={`${getWeatherDescription(parseInt(weatherType))} weather icon`} className="current-weather-icon"></img>
+                        <img src={getWeatherIcon(parseInt(weatherType), isDay(currentTime, sunrise, sunset))} alt={`${getWeatherDescription(parseInt(weatherType))} weather icon`} className="current-weather-icon"></img>
                     </div>
                     
 

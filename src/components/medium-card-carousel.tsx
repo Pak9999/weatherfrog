@@ -67,6 +67,9 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                                     minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
                                     precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
                                     wind={weather ? weather.hourly.wind_speed_100m[0].toString() : "--"}
+                                    currentTime={weather ? weather.hourly.time[0] : undefined}
+                                    sunrise={weather ? weather.daily.sunrise[0] : undefined}
+                                    sunset={weather ? weather.daily.sunset[0] : undefined}
                                     showRemoveButton={carouselType === "favorites"}
                                     onRemove={() => onRemoveFavorite && onRemoveFavorite(card)}
                                 />

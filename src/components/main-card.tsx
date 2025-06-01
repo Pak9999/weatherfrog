@@ -34,6 +34,9 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
                     minTemp={Math.round(weather.daily.temperature_2m_min[0]).toString()}
                     longitude={weather.longitude}
                     latitude={weather.latitude}
+                    currentTime={weather.hourly.time[0]}
+                    sunrise={weather.daily.sunrise[0]}
+                    sunset={weather.daily.sunset[0]}
                     onFavoriteAdded={onFavoriteAdded}
                 />
                 <hr></hr>
