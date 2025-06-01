@@ -61,13 +61,23 @@ export const getFavorites = (): Array<{ name: string, latitude: number, longitud
 export const saveRecentSearch = (location: { name: string, latitude: number, longitude: number }): void => {
   const recentSearches = getRecentSearches();
   
-  const filtered = recentSearches.filter(
-    search => !(search.latitude === location.latitude && search.longitude === location.longitude)
-  );
+  const tolerance = 0.0001; // Approximately 11 meters at the equator
   
-  filtered.unshift(location);
+  const isDuplicate = recentSearches.some(search => {
+    const latDiff = Math.abs(search.latitude - location.latitude);
+    const lonDiff = Math.abs(search.longitude - location.longitude);
+    
+    return latDiff <= tolerance && lonDiff <= tolerance;
+  });
   
-  const trimmed = filtered.slice(0, 5);
+  if (isDuplicate) {
+    return;
+  }
+  
+  recentSearches.unshift(location);
+  
+  // Keep only the most recent 5 searches
+  const trimmed = recentSearches.slice(0, 5);
   
   localStorage.setItem('recentSearches', JSON.stringify(trimmed));
 };
