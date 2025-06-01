@@ -24,6 +24,7 @@ const Body: React.FC = () => {
     const [recentSearches, setRecentSearches] = useState<Array<{ name: string, latitude: number, longitude: number }>>([])
     const [userLatitude, setUserLatitude] = useState<number | null>(null)
     const [userLongitude, setUserLongitude] = useState<number | null>(null)
+    const [isUserSelection, setIsUserSelection] = useState(false)
 
     // Load favorites and recent searches from localStorage on component mount
     useEffect(() => {
@@ -71,9 +72,7 @@ const Body: React.FC = () => {
             setUserLongitude(13.405)
             setSelectedLocation({ latitude: 52.52, longitude: 13.405, name: "Berlin (Fallback)" })
         }
-    }, []);
-
-    useEffect(() => {
+    }, []);    useEffect(() => {
         const fetchWeather = async () => {
             if (!selectedLocation) return;
             setLoading(true);
@@ -81,9 +80,10 @@ const Body: React.FC = () => {
             try {
                 const data = await getDetailedWeather(selectedLocation.latitude, selectedLocation.longitude);
                 setDetailedWeather(data);
-                // Save to recent searches
-                saveRecentSearch(selectedLocation);
-                setRecentSearches(getRecentSearches());
+                if (isUserSelection) {
+                    saveRecentSearch(selectedLocation);
+                    setRecentSearches(getRecentSearches());
+                }
             } catch(err) {
                 console.error("Error fetching weather data:", err);
             } finally {
@@ -91,9 +91,8 @@ const Body: React.FC = () => {
             }
         };
         fetchWeather();
-    }, [selectedLocation]);
-
-    const handleLocationSelect = async (location: { name: string, latitude: number, longitude: number }) => {
+    }, [selectedLocation, isUserSelection]);    const handleLocationSelect = async (location: { name: string, latitude: number, longitude: number }) => {
+        setIsUserSelection(true);
         setSelectedLocation(location);
     };
 
