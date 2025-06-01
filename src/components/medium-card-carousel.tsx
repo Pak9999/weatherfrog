@@ -50,13 +50,12 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
             <div className="medium-embla" ref={emblaRef}>
                 <div className="medium-embla__container">
                     
-                    {cardData.map((card, index) => {
+                    {cardData.map((card) => {
                         const key = `${card.latitude},${card.longitude}`;
                         const weather = weatherData[key];
                         return (
-                            <div className="medium-embla__slide">
+                            <div className="medium-embla__slide" key={key}>
                                 <MediumCard
-                                    key={index}
                                     locationName={card.name}
                                     city="Sweden"
                                     temperature={weather ? Math.round(weather.hourly.temperature_2m[0]).toString() : "--"}
