@@ -25,6 +25,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
     const [weatherData, setWeatherData] = useState<CardWeather>({});
 
     useEffect(() => {
+        console.log("Fetching weather data for cards:", cardData);
         cardData.forEach(async (card) => {
             const key = `${card.latitude},${card.longitude}`;
             if (!weatherData[key]) {
@@ -57,8 +58,8 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                         return (
                             <div className="medium-embla__slide" key={key}>
                                 <MediumCard
-                                    locationName={card.name}
-                                    city="Sweden"
+                                    locationName={card.name.split(",")[0] || ""}
+                                    country={card.name.split(",")[1] || ""}
                                     temperature={weather ? Math.round(weather.hourly.temperature_2m[0]).toString() : "--"}
                                     weatherIcon={weather ? weather.hourly.weather_code[0].toString() : "0"}
                                     weatherType={weather ? weather.hourly.weather_code[0].toString() : "0"}

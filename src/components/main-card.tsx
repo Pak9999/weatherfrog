@@ -22,8 +22,8 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
             <div className="main-card-container">
 
                 <MainCardHead 
-                    locationName={locationName}
-                    country="Sweden"
+                    locationName={locationName.split(",")[0] || ""}
+                    country={locationName.split(",")[1] || ""}
                     temperature={Math.round(weather.hourly.temperature_2m[0]).toString()}
                     feelsLike={Math.round(weather.hourly.apparent_temperature[0]).toString()}
                     /* Update 2 below when coded weather codes to weather type */

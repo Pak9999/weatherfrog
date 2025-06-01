@@ -9,7 +9,7 @@ import { getWeatherIcon, getWeatherDescription } from "../utils/weatherUtils";
 
 interface MediumCardProps {
     locationName: string;
-    city: string;
+    country: string;
     temperature: string;
     weatherIcon: string;
     weatherType: string;
@@ -22,7 +22,7 @@ interface MediumCardProps {
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, showRemoveButton, onRemove }) => {
     return (
         <>
             <div className="medium-card">
@@ -39,7 +39,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ locationName, city, temperature
                     <div className="medium-card-left-column">
                         <div className="medium-card-location">
                             <h4 className="medium-card-location-name">{locationName}</h4>
-                            <p className="medium-card-location-city">{city}</p>
+                            <p className="medium-card-location-city">{country}</p>
                         </div>
                         <div className="medium-card-temperature">
                             <h3 className="medium-card-temp">{temperature}°C</h3>
