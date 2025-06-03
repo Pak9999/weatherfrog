@@ -224,7 +224,8 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
             `Your current location is ${locations[0].name}` : 
             `Showing data for ${locations.length} locations`
           }
-        </div>        <div className="date-picker-section">
+        </div>        
+        <div className="date-picker-section">
           <div className="form__group">
             <input
               type="date"

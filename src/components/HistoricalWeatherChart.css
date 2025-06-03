@@ -194,11 +194,8 @@
 .chart-wrapper {
     width: 96%;
     height: 300px;
-
-    background-color: white;
     padding: 0.5rem;
     border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .error-message {

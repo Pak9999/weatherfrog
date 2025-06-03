@@ -25,9 +25,6 @@ const CompareTemp: React.FC<CompareTempProps> = ({ userLatitude, userLongitude, 
                     initialLongitude={userLongitude}
                     initialLocationName={selectedLocation.name}
                 />
-
-                
-
             </div>
         </>
     );
