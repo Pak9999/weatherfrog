@@ -5,7 +5,7 @@ import React from "react";
 import useEmblaCarousel from 'embla-carousel-react';
 import WeeklyCard from "./weekly-card";
 import HourlyCard from "./hourly-card";
-import { getWeatherIcon, isDay } from "../utils/weatherUtils";
+import { getWeatherIcon, isDay, getCurrentHourIndex, formatTime } from "../utils/weatherUtils";
 
 import "./main-card-carousel.css";
 
@@ -18,45 +18,63 @@ interface MainCardCarouselProps {
 }
 
 
-const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weather }) => {    const [emblaRef] = useEmblaCarousel({
+const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weather }) => {
+    const [emblaRef] = useEmblaCarousel({
         align: 'start',
         containScroll: 'trimSnaps',
         dragFree: true,
         loop: false
     });
 
-    const getCurrentHourIndex = (): number => {
-        const now = new Date();
-        const currentHour = now.getHours();
-        
-        return weather.hourly.time.findIndex(time => {
-            const timeHour = new Date(time).getHours();
-            const timeDate = new Date(time).getDate();
-            return timeHour === currentHour && timeDate === now.getDate();
-        });
+    const getTimeZoneAwareCurrentHourIndex = (): number => {
+        return getCurrentHourIndex(weather.hourly.time, weather.utc_offset_seconds);
     };
 
     const getNext12Hours = () => {
-        const startIndex = getCurrentHourIndex();
+        const startIndex = getTimeZoneAwareCurrentHourIndex();
         if (startIndex === -1) return weather.hourly.time.slice(0, 12);
         return weather.hourly.time.slice(startIndex, startIndex + 12);
     };
 
-    return (
+    const getSunriseForDate = (timeString: string): string => {
+        // Find the corresponding sunrise for the given time
+        const timeDate = new Date(timeString).toDateString();
+        for (let i = 0; i < weather.daily.time.length; i++) {
+            const dailyDate = new Date(weather.daily.time[i]).toDateString();
+            if (dailyDate === timeDate) {
+                return weather.daily.sunrise[i];
+            }
+        }
+        return weather.daily.sunrise[0]; // Fallback to first day
+    };
+
+    const getSunsetForDate = (timeString: string): string => {
+        const timeDate = new Date(timeString).toDateString();
+        for (let i = 0; i < weather.daily.time.length; i++) {
+            const dailyDate = new Date(weather.daily.time[i]).toDateString();
+            if (dailyDate === timeDate) {
+                return weather.daily.sunset[i];
+            }
+        }
+        return weather.daily.sunset[0]; // Fallback to first day
+    };    return (
         <div className="main-card-carousel-container">
             <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
             <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
                     {forecastType === "hourly"                        
                     ? getNext12Hours().map((time, relativeIdx) => {
-                            const absoluteIdx = getCurrentHourIndex() + relativeIdx;
+                            const absoluteIdx = getTimeZoneAwareCurrentHourIndex() + relativeIdx;
+                            const sunrise = getSunriseForDate(time);
+                            const sunset = getSunsetForDate(time);
                             return (
                                 <div className="embla__slide" key={time}>
                                     <HourlyCard
-                                    /* Must update this -- right now breaks when updating (searching) location to one that is one date ahead */
-                                    /* !!!!!!!!  */
-                                        hour={time.slice(-5)}
-                                        weatherIcon={getWeatherIcon(weather.hourly.weather_code[absoluteIdx], isDay(time, weather.daily.sunrise[0], weather.daily.sunset[0]))}
+                                        hour={formatTime(time)}
+                                        weatherIcon={getWeatherIcon(
+                                            weather.hourly.weather_code[absoluteIdx], 
+                                            isDay(time, sunrise, sunset)
+                                        )}
                                         weatherType={weather.hourly.weather_code[absoluteIdx].toString()}
                                         temperature={Math.round(weather.hourly.temperature_2m[absoluteIdx]).toString()}
                                     />

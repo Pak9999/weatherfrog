@@ -100,6 +100,16 @@ export const getWeatherDescription = (weatherCode: number): string => {
     return iconMap[weatherCode]?.description || "Unknown";
 };
 
+export const getCurrentTimeInTimezone = (utcOffsetSeconds: number): Date => {
+    const now = new Date();
+    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+    return new Date(utcTime + (utcOffsetSeconds * 1000));
+};
+
+export const parseApiTime = (timeString: string): Date => {
+    return new Date(timeString);
+};
+
 export const formatTime = (timeString: string): string => {
     const date = new Date(timeString);
     return date.toLocaleTimeString('sv-SE', { 
@@ -117,9 +127,9 @@ export const formatDate = (dateString: string): string => {
     });
 };
 
-export const getDayName = (dateString: string): string => {
+export const getDayName = (dateString: string, utcOffsetSeconds?: number): string => {
     const date = new Date(dateString);
-    const today = new Date();
+    const today = utcOffsetSeconds ? getCurrentTimeInTimezone(utcOffsetSeconds) : new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
     
@@ -143,4 +153,14 @@ export const isDay = (timeString: string, sunriseString?: string, sunsetString?:
     const sunset = new Date(sunsetString);
     
     return time >= sunrise && time <= sunset;
+};
+
+export const getCurrentHourIndex = (hourlyTimes: string[], utcOffsetSeconds: number): number => {
+    const currentTimeInLocation = getCurrentTimeInTimezone(utcOffsetSeconds);
+    
+    return hourlyTimes.findIndex(time => {
+        const apiTime = new Date(time);
+        const timeDiff = Math.abs(apiTime.getTime() - currentTimeInLocation.getTime());
+        return timeDiff < (30 * 60 * 1000);
+    });
 };

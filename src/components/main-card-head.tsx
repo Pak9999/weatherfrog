@@ -22,6 +22,7 @@ interface MainCardHeadProps {
     currentTime: string;
     sunrise: string;
     sunset: string;
+    utcOffsetSeconds: number;
     onFavoriteAdded?: () => void;
 }
 
