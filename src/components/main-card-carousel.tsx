@@ -84,7 +84,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
                         : weather.daily.time.map((date, idx) => (
                             <div className="embla__slide" key={date}>
                                 <WeeklyCard
-                                    day={new Date(date).toLocaleDateString(undefined, { weekday: 'short' })}
+                                    day={new Date(date).toLocaleDateString('en-US', { weekday: 'short' })}
                                     date={date.slice(5)}
                                     weatherIcon={getWeatherIcon(weather.daily.weather_code[idx], true)}
                                     weatherType={weather.daily.weather_code[idx].toString()}

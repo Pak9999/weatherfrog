@@ -35,11 +35,10 @@ const MainCardDetails: React.FC<MainCardDetailsProps> = ({ sunrise, sunset, prec
                             <td><img src="src/assets/v4/umbrella.svg" alt="umbrella icon"></img></td>
                             <td><p>Precipitation</p></td>
                             <td><p>{precipitation} mm</p></td>
-                        </tr>
-                        <tr className="wind">
+                        </tr>                        <tr className="wind">
                             <td><img src="src/assets/v4/windy.svg" alt="wind icon"></img></td>
                             <td><p>Wind</p></td>
-                            <td><p>{wind} m/s</p></td>
+                            <td><p>{wind}</p></td>
                         </tr>
                         <tr className="humidity">
                             <td><img src="src/assets/humidity.svg" alt="humidity icon"></img></td>

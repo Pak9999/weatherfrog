@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import "./medium-card-carousel.css";
 import MediumCard from "./medium-card";
 import { getDetailedWeather } from "../services/weatherService"
+import { formatWindData } from "../utils/weatherUtils";
 import type { WeatherDetailedResponse } from "../types/weather";
 
 
@@ -65,7 +66,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                                     maxTemp={weather ? Math.round(weather.daily.temperature_2m_max[0]).toString() : "--"}
                                     minTemp={weather ? Math.round(weather.daily.temperature_2m_min[0]).toString() : "--"}
                                     precipitation={weather ? weather.hourly.precipitation[0].toString() : "--"}
-                                    wind={weather ? weather.hourly.wind_speed_100m[0].toString() : "--"}
+                                    wind={weather ? formatWindData(weather.hourly.wind_speed_100m[0], weather.hourly.wind_direction_100m[0]) : "--"}
                                     currentTime={weather ? weather.hourly.time[0] : undefined}
                                     sunrise={weather ? weather.daily.sunrise[0] : undefined}
                                     sunset={weather ? weather.daily.sunset[0] : undefined}

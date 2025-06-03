@@ -164,3 +164,20 @@ export const getCurrentHourIndex = (hourlyTimes: string[], utcOffsetSeconds: num
         return timeDiff < (30 * 60 * 1000);
     });
 };
+
+export const getWindDirection = (degrees: number): string => {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    
+    const normalizedDegrees = degrees * 8 / 360;
+    
+    const roundedDegrees = Math.round(normalizedDegrees);
+    
+    const directionIndex = (roundedDegrees + 8) % 8;
+    
+    return directions[directionIndex];
+};
+
+export const formatWindData = (speed: number, direction: number): string => {
+    const windDirection = getWindDirection(direction);
+    return `${speed.toFixed(1)} m/s ${windDirection}`;
+};

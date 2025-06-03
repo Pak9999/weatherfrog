@@ -17,6 +17,7 @@ interface MediumCardProps {
     minTemp: string;
     precipitation: string;
     wind: string;
+    windDirection?: string;
     currentTime?: string;
     sunrise?: string;
     sunset?: string;
@@ -64,7 +65,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperat
                             </div>
                             <div className="medium-card-wind">
                                 <img src="/src/assets/v4/windy.svg" alt="wind-icon" className="medium-card-wind-icon"></img>
-                                <p className="medium-card-wind-text">{wind}m/s</p>
+                                <p className="medium-card-wind-text">{wind}</p>
                             </div>
                         </div>
                     </div>
