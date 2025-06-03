@@ -69,7 +69,7 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, full
                     
                     </div>
                     <div className="gps-and-favorite">
-                        <button onClick={handleAddToFavorites}> <img className="star-icon" src="src/assets/star-icon.svg" alt="star-icon" />Favorite</button>
+                        <button onClick={handleAddToFavorites} className="fav-button"> <img className="star-icon" src="src/assets/star-icon.svg" alt="star-icon" /> Add to favorites</button>
                     </div>
                 </section>
             </div>
