@@ -37,7 +37,6 @@ interface HistoricalWeatherChartProps {
 const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initialLatitude, initialLongitude, initialLocationName = "Current Location" }) => {
   const [chartData, setChartData] = useState<ChartData<'line', number[], string> | null>(null);  
   const [startDate, setStartDate] = useState<string>(() => {
-    // Default to today's date but adjust the year based on the current view
     const today = new Date();
     return today.toISOString().split('T')[0];
   });
@@ -47,7 +46,6 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Get location name for initial location if it's just "Current Location"
   useEffect(() => {
     const getLocationName = async () => {
       if (initialLocationName === "Current Location" || initialLocationName === "Berlin (Fallback)") {
@@ -64,7 +62,6 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
           );
         } catch (err) {
           console.error("Could not get location name:", err);
-          // Keep the default name if reverse geocoding fails
         }
       }
     };
@@ -85,26 +82,21 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
         let commonLabels: string[] = [];
 
         const datasets = (await Promise.all(
-          locations.map(async (location, index) => {  // Get the selected date parts (month and day)
+          locations.map(async (location, index) => {  
             const selectedDate = new Date(startDate);
             const selectedMonth = selectedDate.getMonth();
             const selectedDay = selectedDate.getDate();
             
-            // Array to store temperature data for each of the 5 years
             const yearlyTemps: number[][] = [];
             
-            // Get today's date for comparison
             const today = new Date();
             
-            // Fetch data for 5 previous years (not including current year)
             const currentYear = new Date().getFullYear();
             for (let yearOffset = 1; yearOffset <= 5; yearOffset++) {
               const year = currentYear - yearOffset;
               
-              // Create date objects for this year with the selected month/day
               const yearStartDate = new Date(year, selectedMonth, selectedDay);
               
-              // Skip years where the start date would be in the future
               if (yearStartDate > today) {
                 console.log(`Skipping year ${year} as the date would be in the future`);
                 continue;
@@ -113,7 +105,6 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
               const yearEndDate = new Date(yearStartDate);
               yearEndDate.setDate(yearEndDate.getDate() + 6); // 7-day period
               
-              // Format dates for API call
               const formattedYearStartDate = yearStartDate.toISOString().split('T')[0];
               const formattedYearEndDate = yearEndDate.toISOString().split('T')[0];
               
@@ -127,7 +118,6 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
                 
                 if (yearData.daily && yearData.daily.temperature_2m_mean) {
                   yearlyTemps.push(yearData.daily.temperature_2m_mean);
-                    // Use the first fetched year's dates for the labels (most recent historical year)
                   if (yearOffset === 1 && index === 0) {
                     commonLabels = yearData.daily.time.map(date => {
                       const d = new Date(date);
@@ -137,21 +127,16 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
                 }
               } catch (yearError) {
                 console.error(`Error fetching data for year ${year}:`, yearError);
-                // If we can't get data for a specific year, we'll just skip it
               }
             }
             
-            // Calculate 5-year average for each day
             const fiveYearAvgTemp: number[] = [];
             
-            // We need data for at least one year
             if (yearlyTemps.length > 0) {
-              // For each day in the 7-day period
               for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
                 let total = 0;
                 let validYearCount = 0;
                 
-                // Sum temperatures for this day across all available years
                 for (let yearIndex = 0; yearIndex < yearlyTemps.length; yearIndex++) {
                   if (yearlyTemps[yearIndex] && yearlyTemps[yearIndex][dayIndex] !== undefined) {
                     total += yearlyTemps[yearIndex][dayIndex];
@@ -159,17 +144,15 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
                   }
                 }
                 
-                // Calculate average if we have data
                 fiveYearAvgTemp.push(validYearCount > 0 ? total / validYearCount : NaN);
               }
             }
             
             const colorBase = getRandomColorValues();
             
-            // Return the dataset with the 5-year average
             return [
               {
-                label: `${location.name} 5-Year Avg Temp`,
+                label: `${location.name}`,
                 data: fiveYearAvgTemp,
                 borderColor: `rgba(${colorBase.r}, ${colorBase.g}, ${colorBase.b}, 1)`,
                 backgroundColor: `rgba(${colorBase.r}, ${colorBase.g}, ${colorBase.b}, 0.5)`,
@@ -177,7 +160,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
               }
             ];
           })
-        )).flat(); // Flatten the array of arrays
+        )).flat(); 
 
         setChartData({
           labels: commonLabels,
@@ -220,42 +203,45 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStartDate(event.target.value);
-  };
-  return (
+  };  return (
     <div className="historical-weather-chart-container">
       <h3>Historical Weather Data (5-Year Average)</h3>
-      <div className="selected-location-title">
-        {locations.length === 1 ? 
-          `Your current location is ${locations[0].name}` : 
-          `Showing data for ${locations.length} locations`
-        }
-      </div>
-      <div className="controls">
-        <div>
-          <label htmlFor="start-date">Select Start Date: </label>
-          <input
-            type="date"
-            id="start-date"
-            value={startDate}
-            onChange={handleDateChange}
-          />
+      <div className="control-panel">
+        <div className="selected-location-title">
+          {locations.length === 1 ? 
+            `Your current location is ${locations[0].name}` : 
+            `Showing data for ${locations.length} locations`
+          }
+        </div>        <div className="date-picker-section">
+          <div className="form__group">
+            <input
+              type="date"
+              id="start-date"
+              value={startDate}
+              onChange={handleDateChange}
+              className="form__field"
+            />
+            <label className="form__label" htmlFor="start-date">Select Start Date</label>
+          </div>
         </div>
-        <LocationSearch onLocationSelect={handleLocationAdd} />
-      </div>
-      <div className="selected-locations">
-        <h4>Selected Locations (Max 5):</h4>
-        <ul>
-          {locations.map(loc => (
-            <li key={loc.id}>
-              {loc.name}
-              {loc.id !== 'initial' && 
-                <button onClick={() => handleLocationRemove(loc.id)} className="remove-btn">
-                  &times;
-                </button>
-              }
-            </li>
-          ))}
-        </ul>
+        <div className="controls">
+          <LocationSearch onLocationSelect={handleLocationAdd} />
+        </div>
+        <div className="selected-locations">
+          <h4>Selected Locations (Max 5):</h4>
+          <ul>
+            {locations.map(loc => (
+              <li key={loc.id}>
+                {loc.name}
+                {loc.id !== 'initial' && 
+                  <button onClick={() => handleLocationRemove(loc.id)} className="remove-btn">
+                    &times;
+                  </button>
+                }
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       {isLoading && <p>Loading historical weather data...</p>}
       {error && <p className="error-message">{error}</p>}

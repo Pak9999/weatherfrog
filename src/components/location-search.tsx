@@ -81,19 +81,23 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
       setShowDropdown(false);
     }, 150);
   };
-
   return (
     <div className="location-search-card">
       <div className="search-input-container" ref={searchContainerRef}>
-        <input
-          type="text"
-          value={query}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          placeholder="Search for a location..."
-          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-        />
+        <div className="form__group field">
+          <input
+            type="text"
+            value={query}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            placeholder="Search for a location..."
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            className="form__field"
+            required
+          />
+          <label className="form__label">Search Location</label>
+        </div>
         <button onClick={handleSearch} disabled={isLoading} className='search-button'>
           {isLoading ? 'Searching...' : 'Search'}
         </button>

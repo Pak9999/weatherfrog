@@ -1,3 +1,67 @@
+/* From Uiverse.io by Sunhotep */ 
+.form__group {
+  position: relative;
+  padding: 20px 0 0;
+  width: 100%;
+  max-width: none;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #6b6b6b;
+  outline: 0;
+  font-size: 17px;
+  color: #2c3e50;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 17px;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #3B324C;
+  pointer-events: none;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #FFE699, #5D3294);
+  border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #FFE699;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+  box-shadow: none;
+}
+
 .location-search-card {
     background-color: rgb(239, 241, 241);
     width: 96%;
@@ -10,29 +74,55 @@
     position: relative; 
 }
 
+.search-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.search-input-container .form__group {
+    flex: 1;
+    min-width: 200px;
+}
+
 
 .search-button {
     background-color: #3B324C;
     color: white;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    height: fit-content;
+}
+
+.search-button:hover {
+    background-color: #2c2538;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.search-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .search-input-container {
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    gap: 1rem;
+    width: 100%;
 }
 
-.search-input-container input {
+.search-input-container .form__group {
     flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
 }
 
 .search-results-dropdown {
@@ -40,7 +130,7 @@
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 10000;
     background-color: white;
     border: 1px solid #ddd;
     border-top: none;
