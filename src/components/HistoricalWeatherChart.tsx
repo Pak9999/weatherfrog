@@ -45,6 +45,18 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const getLocationName = async () => {
@@ -205,7 +217,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     setStartDate(event.target.value);
   };  return (
     <div className="historical-weather-chart-container">
-      <h3>Compare historical Weather Data (5-Year Average)</h3>
+      <h3>Historical Weather Data (5-Year Average)</h3>
       <div className="control-panel">
         <div className="selected-location-title">
           {locations.length === 1 ? 
@@ -244,9 +256,66 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
         </div>
       </div>
       {isLoading && <p>Loading historical weather data...</p>}
-      {error && <p className="error-message">{error}</p>}
-      {!isLoading && !error && chartData && chartData.labels && chartData.labels.length > 0 && chartData.datasets.length > 0 ? (
-        <Line data={chartData} />
+      {error && <p className="error-message">{error}</p>}      {!isLoading && !error && chartData && chartData.labels && chartData.labels.length > 0 && chartData.datasets.length > 0 ? (
+        <div className="chart-wrapper responsive-chart">
+          <Line 
+            data={chartData} 
+            options={{ 
+              responsive: true,
+              maintainAspectRatio: false,
+              aspectRatio: windowWidth < 480 ? 1 : 2,
+              resizeDelay: 100,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Date',
+                  },
+                  ticks: {
+                    font: {
+                      size: windowWidth < 480 ? 10 : 12
+                    }
+                  }
+                },
+                y: {
+                  title: {
+                    display: windowWidth >= 480,
+                    text: 'Temperature (°C)',
+                  },
+                  ticks: {
+                    maxTicksLimit: windowWidth < 768 ? 6 : 8,
+                    font: {
+                      size: windowWidth < 480 ? 10 : 12
+                    },
+                    callback: function(value) {
+                      return value + '°C';
+                    }
+                  }
+                }
+              },
+              plugins: {
+                legend: {
+                  position: windowWidth < 480 ? 'bottom' as const : 'top' as const,
+                  labels: {
+                    boxWidth: windowWidth < 480 ? 10 : 12,
+                    font: {
+                      size: windowWidth < 480 ? 10 : 12
+                    }
+                  }
+                },
+                tooltip: {
+                  callbacks: {
+                    label: function(tooltipItem) {
+                      const label = tooltipItem.dataset.label || '';
+                      const value = tooltipItem.parsed.y !== null ? tooltipItem.parsed.y + '°C' : '';
+                      return `${label}: ${value}`;
+                    }
+                  }
+                }
+              }
+            }}
+          />
+        </div>
       ) : (
         !isLoading && !error && <p>No data to display. Add locations or check the selected date and ensure they have historical data.</p>
       )}
