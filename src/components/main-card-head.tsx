@@ -11,6 +11,7 @@ import { getWeatherIcon, getWeatherDescription, isDay } from "../utils/weatherUt
 interface MainCardHeadProps {
     locationName: string;
     country: string;
+    fullName: string;
     temperature: string;
     feelsLike: string;
     weatherIcon: string;
@@ -27,10 +28,10 @@ interface MainCardHeadProps {
 }
 
 
-const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, currentTime, sunrise, sunset, onFavoriteAdded}) => {
+const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, fullName, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, currentTime, sunrise, sunset, onFavoriteAdded}) => {
     const handleAddToFavorites = () => {
         const location = {
-            name: locationName,
+            name: fullName,
             longitude: longitude,
             latitude: latitude
         };

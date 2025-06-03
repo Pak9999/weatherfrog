@@ -23,9 +23,11 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
     
     return (
         <>
-            <div className="main-card-container">                <MainCardHead 
+            <div className="main-card-container">                
+                <MainCardHead 
                     locationName={locationName.split(",")[0] || ""}
                     country={locationName.split(",")[1] || ""}
+                    fullName={locationName} /* Used to make sure that favorites are saved with complete location data */
                     temperature={Math.round(weather.hourly.temperature_2m[safeCurrentHourIndex]).toString()}
                     feelsLike={Math.round(weather.hourly.apparent_temperature[safeCurrentHourIndex]).toString()}
                     /* Update 2 below when coded weather codes to weather type */
@@ -42,7 +44,8 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
                     utcOffsetSeconds={weather.utc_offset_seconds}
                     onFavoriteAdded={onFavoriteAdded}
                 />
-                <hr></hr>                <MainCardDetails 
+                <hr></hr>                
+                <MainCardDetails 
                     sunrise={weather.daily.sunrise[0].slice(-5)}
                     sunset={weather.daily.sunset[0].slice(-5)}
                     precipitation={weather.hourly.precipitation[safeCurrentHourIndex].toString()}
