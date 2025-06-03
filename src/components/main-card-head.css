@@ -86,8 +86,40 @@
     width: 20px;
     height: 20px;
     position: relative;
-    top: 3px;
-    margin-right: 5px;
+    top: .06
+rem;
+    right: .1rem;
+    align-items: center;
+    justify-content: center;
+    filter: invert(65%) sepia(92%) saturate(1634%) hue-rotate(9deg) brightness(105%) contrast(103%);
+}
+
+.gps-and-favorite {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.fav-button {
+    background-color: rgba(59, 50, 76, 0.85);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.fav-button:hover {
+    background-color: #3B324C;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (max-width: 660px) {
