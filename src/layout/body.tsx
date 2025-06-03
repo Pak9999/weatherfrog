@@ -103,11 +103,14 @@ const Body: React.FC = () => {
 
     const handleFavoriteAdded = () => {
     setFavorites(getFavorites()); 
-    };
-
-    const handleRemoveFavorite = (location: { name: string, latitude: number, longitude: number }) => {
+    };    const handleRemoveFavorite = (location: { name: string, latitude: number, longitude: number }) => {
         removeFavorite(location);
         setFavorites(getFavorites());
+    };
+
+    const handleCardClick = (location: { name: string, latitude: number, longitude: number }) => {
+        setIsUserSelection(true);
+        setSelectedLocation(location);
     };
 
     return (
@@ -130,10 +133,12 @@ const Body: React.FC = () => {
                     carouselType="favorites"
                     cardData={favorites}
                     onRemoveFavorite={handleRemoveFavorite}
+                    onCardClick={handleCardClick}
                 />
                 <MediumCardCarousel
                     carouselType="recent"
                     cardData={recentSearches}
+                    onCardClick={handleCardClick}
                 />
                 <CompareTemp 
                     userLatitude={userLatitude || 0}

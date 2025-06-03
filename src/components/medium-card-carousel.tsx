@@ -15,6 +15,7 @@ interface MediumCardCarouselProps {
         latitude: number;
     }>;
     onRemoveFavorite?: (location: { name: string, latitude: number, longitude: number }) => void;
+    onCardClick?: (location: { name: string, latitude: number, longitude: number }) => void;
 }
 
 interface CardWeather {
@@ -22,7 +23,7 @@ interface CardWeather {
 }
 
 
-const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, cardData, onRemoveFavorite }) => {
+const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, cardData, onRemoveFavorite, onCardClick }) => {
     const [weatherData, setWeatherData] = useState<CardWeather>({});
 
     useEffect(() => {
@@ -56,8 +57,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                         const key = `${card.latitude},${card.longitude}`;
                         const weather = weatherData[key];
                         return (
-                            <div className="medium-embla__slide" key={key}>
-                                <MediumCard
+                            <div className="medium-embla__slide" key={key}>                                <MediumCard
                                     locationName={card.name.split(",")[0] || ""}
                                     country={card.name.split(",")[1] || ""}
                                     temperature={weather ? Math.round(weather.hourly.temperature_2m[0]).toString() : "--"}
@@ -72,6 +72,7 @@ const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, c
                                     sunset={weather ? weather.daily.sunset[0] : undefined}
                                     showRemoveButton={carouselType === "favorites"}
                                     onRemove={() => onRemoveFavorite && onRemoveFavorite(card)}
+                                    onClick={() => onCardClick && onCardClick(card)}
                                 />
                             </div>
                     );

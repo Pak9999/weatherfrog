@@ -23,13 +23,14 @@ interface MediumCardProps {
     sunset?: string;
     showRemoveButton?: boolean;
     onRemove?: () => void;
+    onClick?: () => void;
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove, onClick }) => {
     return (
         <>
-            <div className="medium-card">
+            <div className="medium-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
                 {showRemoveButton && (
                     <button 
                         className="remove-button" 
