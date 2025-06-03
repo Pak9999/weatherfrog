@@ -1,4 +1,4 @@
-.compare-temp {
+.compare-temp-container {
     background-color: rgb(239, 241, 241);
     width: 96%;
     max-width: 800px;
@@ -8,21 +8,24 @@
     margin-top: 2%;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: auto;
+/*     height: auto;
     overflow: hidden;
-    box-sizing: border-box;
+    box-sizing: border-box; */
 }
 
-.compare-temp-container {
-    padding: 1rem;
+.compare-temp-header {
+    padding: 0.5rem;
     background-color: rgb(249, 249, 249);
     border-radius: 6px;
     margin-bottom: 1rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .compare-temp-container h3 {
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.2rem 0;
     color: #2c3e50;
     font-size: 1.4rem;
     font-weight: 600;
@@ -104,58 +107,3 @@
     gap: 0.5rem;
 }
 
-@media (min-width: 768px) {
-    .compare-temp .chart-wrapper {
-        height: 400px;
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 767px) {
-    .compare-temp .chart-wrapper {
-        height: 380px;
-        padding: 0.75rem;
-    }
-    
-    .compare-temp {
-        padding: 0.25rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .compare-temp .chart-wrapper {
-        height: 450px; /* Further increase height on mobile for better visibility */
-        padding: 0.5rem;
-        margin-top: 1rem;
-    }
-    
-    /* Make better use of vertical space on mobile */
-    .compare-temp .selected-locations ul {
-        display: flex;
-        flex-direction: column;
-        max-height: none;
-        gap: 6px;
-    }
-    
-    .compare-temp .selected-locations li {
-        margin-bottom: 0;
-        font-size: 0.9rem;
-        padding: 0.25rem 0.5rem;
-    }
-    
-    .compare-temp .selected-locations h4 {
-        margin-bottom: 0.5rem;
-        font-size: 1rem;
-    }
-    
-    /* Adjust the chart container to allow for more vertical space */
-    .compare-temp .historical-weather-chart-container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* Make the control panel more compact */
-    .compare-temp .control-panel {
-        margin-bottom: 0.75rem;
-    }
-}

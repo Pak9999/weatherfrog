@@ -19,10 +19,7 @@ interface CompareTempProps {
 const CompareTemp: React.FC<CompareTempProps> = ({ userLatitude, userLongitude, selectedLocation }) => {
     return (
         <>
-            <div className="compare-temp">
-                <div className="compare-temp-container">
-                    <h3>Compare temperatures</h3>
-                </div>
+            <div className="compare-temp-container">
                 <HistoricalWeatherChart 
                     initialLatitude={userLatitude}
                     initialLongitude={userLongitude}

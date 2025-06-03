@@ -205,7 +205,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     setStartDate(event.target.value);
   };  return (
     <div className="historical-weather-chart-container">
-      <h3>Historical Weather Data (5-Year Average)</h3>
+      <h3>Compare historical Weather Data (5-Year Average)</h3>
       <div className="control-panel">
         <div className="selected-location-title">
           {locations.length === 1 ? 
@@ -246,9 +246,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
       {isLoading && <p>Loading historical weather data...</p>}
       {error && <p className="error-message">{error}</p>}
       {!isLoading && !error && chartData && chartData.labels && chartData.labels.length > 0 && chartData.datasets.length > 0 ? (
-        <div className="chart-wrapper">
-          <Line data={chartData} />
-        </div>
+        <Line data={chartData} />
       ) : (
         !isLoading && !error && <p>No data to display. Add locations or check the selected date and ensure they have historical data.</p>
       )}
