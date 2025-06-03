@@ -179,5 +179,5 @@ export const getWindDirection = (degrees: number): string => {
 
 export const formatWindData = (speed: number, direction: number): string => {
     const windDirection = getWindDirection(direction);
-    return `${speed.toFixed(1)} m/s ${windDirection}`;
+    return `${windDirection} ${speed.toFixed(1)} m/s`;
 };
