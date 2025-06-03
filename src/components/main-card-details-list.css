@@ -9,7 +9,7 @@
 }
 
 tbody tr td:first-child {
-    text-align: left;
+    text-align: center;
     width: 1%;
 }
 
@@ -22,14 +22,22 @@ tbody tr td:nth-child(3) {
     padding-right: 1rem;
 }
 
-.sun{
-    width: 40px;
-    height: 40px;
+.detail-icon {
+    width: 3rem;
+    height: 3rem;
 }
 
-.humidity {
-    width: 45px;
-    height: 45px;
+#umbrella-icon {
+    width: 2.3rem;
+}
+
+#wind-icon {
+    width: 2.4rem;
+}
+
+
+#uv-index-icon {
+    width: 2.3rem;
 }
 
 @media screen and (max-width: 660px) {
