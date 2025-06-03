@@ -37,7 +37,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperat
                         onClick={onRemove}
                         aria-label="Remove from favorites"
                     >
-                        ×
+                        <p>×</p>
                     </button>
                 )}
                 <div className="medium-card-container">

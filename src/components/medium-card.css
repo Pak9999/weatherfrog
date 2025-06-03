@@ -11,24 +11,30 @@
 
 .remove-button {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 26px;
-    height: 26px;
+    top: 0.5rem;
+    right: 0.5rem;
     border: none;
     border-radius: 5px;
     background-color: rgba(59, 50, 76, 0.85);
     color: white;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 800;
     cursor: pointer;
     z-index: 10;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    padding-bottom: 0.8rem;
+    padding: 0.8rem 0.6rem 1rem 0.6rem;
+}
+
+.remove-button p {
+    line-height: 1px;
+    margin: 0;
+    padding: 0;
 }
 
 .remove-button:hover {

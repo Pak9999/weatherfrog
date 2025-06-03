@@ -4,21 +4,15 @@
 
 .header-bg {
     background-color: #3B324C;
-    height: 5.2rem;
-    
-}
-
-.header-content {
-    display: flex;
-    flex-direction: row;
-    color:ghostwhite;
-    padding-top: 2rem;
-    width: 96%;
+    height: 3em;
+    width: 100%;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-
+    margin-top: 2%;
+    border-radius: 5px;
 }
+
 
 .header-content > a {
     color:ghostwhite;
@@ -34,4 +28,27 @@
     margin-top: 0.75rem;
     margin-left: 0.2rem;
     rotate: 20deg;
+}
+
+
+@media screen and (max-width: 660px) {
+    a {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header-bg {
+        height: 2rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .header-content > a {
+        font-size: 0.6rem;
+    }
+
+    .WF {
+        height: 1.4rem;
+
+    }
 }
