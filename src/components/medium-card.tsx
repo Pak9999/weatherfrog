@@ -17,18 +17,20 @@ interface MediumCardProps {
     minTemp: string;
     precipitation: string;
     wind: string;
+    windDirection?: string;
     currentTime?: string;
     sunrise?: string;
     sunset?: string;
     showRemoveButton?: boolean;
     onRemove?: () => void;
+    onClick?: () => void;
 }
 
 
-const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove }) => {
+const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove, onClick }) => {
     return (
         <>
-            <div className="medium-card">
+            <div className="medium-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
                 {showRemoveButton && (
                     <button 
                         className="remove-button" 
@@ -64,7 +66,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperat
                             </div>
                             <div className="medium-card-wind">
                                 <img src="/src/assets/v4/windy.svg" alt="wind-icon" className="medium-card-wind-icon"></img>
-                                <p className="medium-card-wind-text">{wind}m/s</p>
+                                <p className="medium-card-wind-text">{wind}</p>
                             </div>
                         </div>
                     </div>

@@ -75,9 +75,22 @@
     flex-direction: row;
 }
 
-.medium-card-maxmin div:first-child, .rain-and-wind div:first-child {
+.medium-card-maxmin div:first-child {
     width: 6rem;
     height: 1.9rem;
+}
+
+.rain-and-wind div:first-child {
+    width: 6rem;
+    height: 1.9rem;
+}
+
+
+
+.medium-card-wind-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .medium-card-maxmin *, .rain-and-wind * {

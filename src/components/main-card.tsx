@@ -6,7 +6,7 @@ import "./main-card.css";
 import MainCardHead from "./main-card-head";
 import MainCardDetails from "./main-card-details-list";
 import MainCardCarousel from "./main-card-carousel";
-import { getCurrentHourIndex } from "../utils/weatherUtils";
+import { getCurrentHourIndex, formatWindData } from "../utils/weatherUtils";
 import type { WeatherDetailedResponse } from "../types/weather";
 
 
@@ -42,14 +42,11 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
                     utcOffsetSeconds={weather.utc_offset_seconds}
                     onFavoriteAdded={onFavoriteAdded}
                 />
-                <hr></hr>
-
-                <MainCardDetails 
+                <hr></hr>                <MainCardDetails 
                     sunrise={weather.daily.sunrise[0].slice(-5)}
                     sunset={weather.daily.sunset[0].slice(-5)}
                     precipitation={weather.hourly.precipitation[safeCurrentHourIndex].toString()}
-                    wind={weather.hourly.wind_speed_100m[safeCurrentHourIndex].toString()}
-                    /* Add wind direction (need to code degrees into NESW) */
+                    wind={formatWindData(weather.hourly.wind_speed_100m[safeCurrentHourIndex], weather.hourly.wind_direction_100m[safeCurrentHourIndex])}
                     humidity={weather.hourly.relative_humidity_2m[safeCurrentHourIndex].toString()}
                     uvIndex={weather.daily.uv_index_max[0].toString()}
                 />
