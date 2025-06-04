@@ -164,4 +164,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - [@infotillandreas](https://www.github.com/infotillandreas)
 
--[@MalikTallouzi](https://github.com/MalikTallouzi)
+- [@MalikTallouzi](https://github.com/MalikTallouzi)
