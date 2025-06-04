@@ -266,6 +266,12 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
               maintainAspectRatio: false,
               aspectRatio: windowWidth < 480 ? 1 : 2,
               resizeDelay: 100,
+              elements: {
+                point: {
+                  radius: windowWidth < 480 ? 4 : 8,
+                  hoverRadius: windowWidth < 480 ? 6 : 8,
+                }
+              },
               scales: {
                 x: {
                   title: {
