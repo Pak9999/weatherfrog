@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="src/assets/WF_logo.webp" width="100" height="100">
+  <img src="src/assets/WF_logo.webp" width="auto" height="100">
 </div>
 
 # WeatherFrog
