@@ -47,7 +47,7 @@ export const getSimpleWeather = async (latitude: number, longitude: number): Pro
 
 export const saveFavorite = (location: { name: string, latitude: number, longitude: number }): void => {
   const favorites = getFavorites();
-  if (!favorites.some(fav => fav.latitude === location.latitude && fav.longitude === location.longitude)) {
+  if (!favorites.some(fav => fav.name === location.name)) {
     favorites.unshift(location);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
@@ -76,13 +76,10 @@ export const removeFavorite = (location: { name: string, latitude: number, longi
 export const saveRecentSearch = (location: { name: string, latitude: number, longitude: number }): void => {
   const recentSearches = getRecentSearches();
   
-  const tolerance = 0.0001;
-  
-  const filteredSearches = recentSearches.filter(search => {
-    const latDiff = Math.abs(search.latitude - location.latitude);
-    const lonDiff = Math.abs(search.longitude - location.longitude);
-    return latDiff > tolerance || lonDiff > tolerance;
-  });
+
+  const filteredSearches = recentSearches.filter(search =>
+    search.name !== location.name
+  );
 
   filteredSearches.unshift(location);
 
