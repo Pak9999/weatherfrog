@@ -1,14 +1,19 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+
+// Services
 import { searchLocation } from '../services/weatherService';
 import type { GeocodingResponse } from '../types/weather';
 
+// Styles
 import './location-search.css';
 
+// Properties
 interface LocationSearchProps {
   onLocationSelect: (location: { name: string, latitude: number, longitude: number }) => void;
 }
 
-export default function LocationSearch({ onLocationSelect }: LocationSearchProps) {
+// Searchbar component
+const LocationSearch: React.FC<LocationSearchProps> = ({ onLocationSelect }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<GeocodingResponse['results']>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +21,7 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
   const [showDropdown, setShowDropdown] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
@@ -29,6 +35,7 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
     };
   }, []);
 
+  // Tidies the search query and activates the search 
   const handleSearch = async () => {
     if (!query.trim()) return;
     
@@ -81,41 +88,46 @@ export default function LocationSearch({ onLocationSelect }: LocationSearchProps
       setShowDropdown(false);
     }, 150);
   };
+
   return (
-    <div className="location-search-card">
-      <div className="search-input-container" ref={searchContainerRef}>
-        <div className="form__group field">
-          <input
-            type="text"
-            value={query}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Search for a location..."
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-            className="form__field"
-            required
-          />
-          <label className="form__label">Search Location</label>
+    <>
+      <div className="location-search-card">
+        <div className="search-input-container" ref={searchContainerRef}>
+          <div className="form__group field">
+            <input
+              type="text"
+              value={query}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Search for a location..."
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              className="form__field"
+              required
+            />
+            <label className="form__label">Search Location</label>
+          </div>
+          <button onClick={handleSearch} disabled={isLoading} className='search-button'>
+            {isLoading ? 'Searching...' : 'Search'}
+          </button>
+          
+          {showDropdown && results.length > 0 && (
+            <ul className="search-results-dropdown">
+              {results.map((location) => (
+                <li key={location.id}>
+                  <button onClick={() => handleSelectLocation(location)}>
+                    {location.name}, {location.country}{location.admin1 ? `, ${location.admin1}` : ''}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        <button onClick={handleSearch} disabled={isLoading} className='search-button'>
-          {isLoading ? 'Searching...' : 'Search'}
-        </button>
         
-        {showDropdown && results.length > 0 && (
-          <ul className="search-results-dropdown">
-            {results.map((location) => (
-              <li key={location.id}>
-                <button onClick={() => handleSelectLocation(location)}>
-                  {location.name}, {location.country}{location.admin1 ? `, ${location.admin1}` : ''}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+        {error && <div className="search-error">{error}</div>}
       </div>
-      
-      {error && <div className="search-error">{error}</div>}
-    </div>
+    </>
   );
-}
+};
+
+export default LocationSearch;
