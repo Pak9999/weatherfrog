@@ -34,7 +34,7 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ onLocationSelect }) => 
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
+  
   // Tidies the search query and activates the search 
   const handleSearch = async () => {
     if (!query.trim()) return;
