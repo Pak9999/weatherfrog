@@ -5,7 +5,7 @@
 
 import React from "react";
 import "./main-card-head.css";
-import { saveFavorite } from "../services/weatherService";
+import { saveFavorite, getFavorites } from "../services/weatherService";
 import { getWeatherIcon, getWeatherDescription, isDay } from "../utils/weatherUtils";
 
 interface MainCardHeadProps {
@@ -35,6 +35,21 @@ const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, full
             longitude: longitude,
             latitude: latitude
         };
+
+        const favorties = getFavorites();
+        const tolerance = 0.0001;
+
+        const isAlreadyFavorite = favorties.some(fav => {
+            const latDiff = Math.abs(fav.latitude - location.latitude);
+            const lonDiff = Math.abs(fav.longitude - location.longitude);
+            return latDiff <= tolerance && lonDiff <= tolerance;
+        });
+
+        if (isAlreadyFavorite) {
+            alert(`'${locationName.split(",")[0]}' is already saved as a favorite.`);
+            return;
+        }
+
         saveFavorite(location);
 
         if (onFavoriteAdded) {
