@@ -227,7 +227,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     setStartDate(event.target.value);
   };  return (
     <div className="historical-weather-chart-container">
-      <h3>Historical Weather Data (5-Year Average)</h3>
+      <h3>Compare Historical Weather Patterns</h3>
       <div className="control-panel">
         <div className="selected-location-title">
           {locations.length === 1 ? 
