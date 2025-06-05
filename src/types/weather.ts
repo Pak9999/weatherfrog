@@ -1,3 +1,5 @@
+// This sets the types for weather-related API responses and historical weather data
+
 export interface WeatherDetailedResponse {
   latitude: number;
   longitude: number;

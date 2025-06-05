@@ -14,7 +14,7 @@ interface MainCardDetailsProps {
     uvIndex: string;
 };
 
-
+// MainCardDetails component
 const MainCardDetails: React.FC<MainCardDetailsProps> = ({ sunrise, sunset, precipitation, wind, humidity, uvIndex }) => {
     return (
         <>

@@ -13,6 +13,7 @@ interface HourlyCardProps {
     temperature: string;
 }
 
+// HourlyCard component
 const HourlyCard: React.FC<HourlyCardProps> = ({ hour, weatherIcon, weatherType, temperature}) => {
     return (
         <>

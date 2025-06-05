@@ -4,6 +4,7 @@ import type { GeocodingResponse, WeatherDetailedResponse, WeatherSimpleResponse,
 const BASE_URL = 'https://api.open-meteo.com/v1';
 const GEO_URL = 'https://geocoding-api.open-meteo.com/v1/search';
 
+// Searches for locations based on a query string
 export const searchLocation = async (query: string): Promise<GeocodingResponse> => {
   const response = await axios.get(GEO_URL, {
     params: {
@@ -16,6 +17,7 @@ export const searchLocation = async (query: string): Promise<GeocodingResponse> 
   return response.data;
 };
 
+// Gets detailed weather data for a specific location
 export const getDetailedWeather = async (latitude: number, longitude: number): Promise<WeatherDetailedResponse> => {
   const response = await axios.get(`${BASE_URL}/forecast`, {
     params: {
@@ -31,6 +33,7 @@ export const getDetailedWeather = async (latitude: number, longitude: number): P
   return response.data;
 };
 
+// Gets simple weather data for a specific location (not currently used in the app, but kept for potential future use)
 export const getSimpleWeather = async (latitude: number, longitude: number): Promise<WeatherSimpleResponse> => {
   const response = await axios.get(`${BASE_URL}/forecast`, {
     params: {
@@ -45,6 +48,7 @@ export const getSimpleWeather = async (latitude: number, longitude: number): Pro
   return response.data;
 };
 
+// Saves a location as a favorite to local storage
 export const saveFavorite = (location: { name: string, latitude: number, longitude: number }): void => {
   const favorites = getFavorites();
   if (!favorites.some(fav => fav.name === location.name)) {
@@ -53,11 +57,13 @@ export const saveFavorite = (location: { name: string, latitude: number, longitu
   }
 };
 
+// Retrieves the list of favorite locations
 export const getFavorites = (): Array<{ name: string, latitude: number, longitude: number }> => {
   const favorites = localStorage.getItem('favorites');
   return favorites ? JSON.parse(favorites) : [];
 };
 
+// Removes a location from favorites
 export const removeFavorite = (location: { name: string, latitude: number, longitude: number }): void => {
   const favorites = getFavorites();
   const tolerance = 0.0001; 
@@ -73,6 +79,7 @@ export const removeFavorite = (location: { name: string, latitude: number, longi
   localStorage.setItem('favorites', JSON.stringify(filteredFavorites));
 };
 
+// Saves a recent search location to local storage
 export const saveRecentSearch = (location: { name: string, latitude: number, longitude: number }): void => {
   const recentSearches = getRecentSearches();
   
@@ -88,12 +95,13 @@ export const saveRecentSearch = (location: { name: string, latitude: number, lon
   localStorage.setItem('recentSearches', JSON.stringify(trimmed));
 };
 
-
+// Retrieves the list of recent search locations
 export const getRecentSearches = (): Array<{ name: string, latitude: number, longitude: number }> => {
   const searches = localStorage.getItem('recentSearches');
   return searches ? JSON.parse(searches) : [];
 };
 
+// Fetches historical weather data for a specific location and date range
 export const fetchHistoricalWeather = async (
   latitude: number,
   longitude: number,

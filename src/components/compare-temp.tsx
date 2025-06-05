@@ -15,7 +15,7 @@ interface CompareTempProps {
     };
 }
 
-
+// CompareTemp component
 const CompareTemp: React.FC<CompareTempProps> = ({ userLatitude, userLongitude, selectedLocation }) => {
     return (
         <>

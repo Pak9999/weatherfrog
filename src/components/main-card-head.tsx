@@ -27,8 +27,10 @@ interface MainCardHeadProps {
     onFavoriteAdded?: () => void;
 }
 
-
+// MainCardHead component
 const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, fullName, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, currentTime, sunrise, sunset, onFavoriteAdded}) => {
+    
+    // Handles adding the current location to favorites
     const handleAddToFavorites = () => {
         const location = {
             name: fullName,

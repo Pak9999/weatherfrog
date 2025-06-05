@@ -58,6 +58,7 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ onLocationSelect }) => 
     }
   };
 
+  // Sets the selected location and closes the dropdown
   const handleSelectLocation = (location: GeocodingResponse['results'][0]) => {
     onLocationSelect({
       name: `${location.name}, ${location.country}${location.admin1 ? `, ${location.admin1}` : ''}`,
@@ -69,6 +70,7 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ onLocationSelect }) => 
     setQuery(''); 
   };
 
+  // Sets the query state and manages the dropdown visibility
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     if (e.target.value.trim() === '') {
@@ -77,12 +79,14 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ onLocationSelect }) => 
     }
   };
 
+  // Sets the dropdown visibility when the input is focused
   const handleInputFocus = () => {
     if (results.length > 0) {
       setShowDropdown(true);
     }
   };
 
+  // Blurs the input and hides the dropdown after a short delay
   const handleInputBlur = () => {
     setTimeout(() => {
       setShowDropdown(false);
