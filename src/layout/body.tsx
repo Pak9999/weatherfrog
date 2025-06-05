@@ -34,6 +34,14 @@ const Body: React.FC = () => {
         setFavorites(getFavorites())
         setRecentSearches(getRecentSearches())
 
+        // Fallback location in case geolocation fails
+        const setFallbackLocation = () => {
+            console.log("Using fallback location: Berlin")
+            setUserLatitude(52.52) 
+            setUserLongitude(13.405)
+            setSelectedLocation({ latitude: 52.52, longitude: 13.405, name: "Berlin (Fallback)" }) 
+        }
+
         // Check if geolocation is available and get user's current location
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -64,18 +72,12 @@ const Body: React.FC = () => {
                 },
                 (error) => {
                     console.error("Error getting user location:", error)
-                    // Fallback to a default location if geolocation fails or is denied
-                    setUserLatitude(52.52) // Berlin as a fallback
-                    setUserLongitude(13.405)
-                    setSelectedLocation({ latitude: 52.52, longitude: 13.405, name: "Berlin (Fallback)" })
+                    setFallbackLocation()
                 }
             )
         } else {
             console.error("Geolocation is not supported by this browser.")
-            // Fallback to a default location if geolocation is not supported
-            setUserLatitude(52.52)
-            setUserLongitude(13.405)
-            setSelectedLocation({ latitude: 52.52, longitude: 13.405, name: "Berlin (Fallback)" })
+            setFallbackLocation()
         }
     }, []);
 
