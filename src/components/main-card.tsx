@@ -3,9 +3,11 @@
 
 import React from "react";
 import "./main-card.css";
+// Components
 import MainCardHead from "./main-card-head";
 import MainCardDetails from "./main-card-details-list";
 import MainCardCarousel from "./main-card-carousel";
+// Utils
 import { getCurrentHourIndex, formatWindData } from "../utils/weatherUtils";
 import type { WeatherDetailedResponse } from "../types/weather";
 

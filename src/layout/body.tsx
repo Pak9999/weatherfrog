@@ -6,6 +6,7 @@ import MainCard from "../components/main-card.tsx"
 import CompareTemp from "../components/compare-temp.tsx";
 import MediumCardCarousel from "../components/medium-card-carousel.tsx";
 import LocationSearch from '../components/location-search.tsx'
+import LoadingSpinner from '../components/loading-spinner.tsx'
 
 // Services
 import { getDetailedWeather, getFavorites, getRecentSearches, saveRecentSearch, removeFavorite } from '../services/weatherService'
@@ -107,10 +108,8 @@ const Body: React.FC = () => {
         // Event handler used by the LocationSearch component to set the selected location
         setIsUserSelection(true);
         setSelectedLocation(location);
-    };
-
-    if (!selectedLocation) {
-        return <div>Loading location...</div>
+    };    if (!selectedLocation) {
+        return <LoadingSpinner message="Loading location..." size="large" />
     }
 
     // Takes a location object (name, latitude, longitude) and adds it to favorites or removes it from favorites
@@ -137,7 +136,7 @@ const Body: React.FC = () => {
                         onLocationSelect={handleLocationSelect} />
                 </div>
 
-                {loading && <p>Loading weather data...</p>}
+                {loading && <LoadingSpinner message="Loading weather data..." size="medium" />}
                 {error && <p className="error">{error}</p>}
 
                 {/* Main card component displaying detailed weather information */}
