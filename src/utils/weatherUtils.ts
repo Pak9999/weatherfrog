@@ -24,7 +24,7 @@ import mixedRainSnow from '../assets/v4/mixed_rain_snow.svg';
 import sleetHail from '../assets/v4/sleet_hail.svg';
 import thunderstormDay from '../assets/v4/isolated_scattered_thunderstorms_day.svg';
 import thunderstormNight from '../assets/v4/isolated_scattered_thunderstorms_night.svg';
-import frog from '/src/assets/WF_logo.webp';
+import frog from '../assets/WF_logo.webp';
 
 
 export const getWeatherIcon = (weatherCode: number, isDay: boolean = true): string => {

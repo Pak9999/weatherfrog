@@ -31,7 +31,7 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
                     temperature={Math.round(weather.hourly.temperature_2m[safeCurrentHourIndex]).toString()}
                     feelsLike={Math.round(weather.hourly.apparent_temperature[safeCurrentHourIndex]).toString()}
                     /* Update 2 below when coded weather codes to weather type */
-                    weatherIcon="/src/assets/react.svg"
+                    weatherIcon="/weatherfrog/assets/react.svg"
                     weatherType={weather.hourly.weather_code[safeCurrentHourIndex].toString()}
                     /* ----- */
                     maxTemp={Math.round(weather.daily.temperature_2m_max[0]).toString()}
