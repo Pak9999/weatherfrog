@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/assets/WF_logo.webp" width="100" height="100">
+  <img src="src/assets/WF_logo.webp" width="auto" height="100">
 </div>
 
 # WeatherFrog
@@ -90,6 +90,27 @@ A modern, responsive weather forecast application built with React and TypeScrip
 - `npm run preview` - Preview the production build locally
 - `npm run lint` - Run ESLint to check for code issues
 
+## Motivation for using React
+The decision to develop this project using React was based on a couple of different factors. Firstly, the team had previous experience working with the library and especially enjoyed the reusable component approach. More so, React is said to be the most popular JavaScript library [[1]](https://www.browserstack.com/guide/angular-vs-react-vs-vue), something that entails a strong and active community [[2]](https://www.geeksforgeeks.org/react/). Meaning support or solutions to common issues rarely are hard to find through resources, guides or forums.
+
+React is also known for the way it handles the DOM and how it updates or changes specific components without reloading the entire page [[2]](https://www.geeksforgeeks.org/react/), [[3]](https://www.w3schools.com/REACT/react_intro.asp). Something that is preferable due to the fact that Wetterfrosch is a single page application. If a user chooses a new location only the main card section will be subject to update, while the other components remain unchanged. In the same way, if a new favorite location is added, the carousel component for favorites will be updated, displaying the card for the new favorite together with the rest. 
+
+React is also known for its scalability [[4]](https://medium.com/@wutamy77/react-vue-or-angular-making-the-right-choice-for-your-project-in-2025-d6939751e575), meaning later additions and further development of the project becomes smoother to handle. New components or applications can be added without messing too much with the established code. Therefore team members can continue to develop Wetterfrosch individually at a later stage.
+
+Most prominent among the framework/library alternatives is Vue. Known for its simplicity and ease of use [[4]](https://medium.com/@wutamy77/react-vue-or-angular-making-the-right-choice-for-your-project-in-2025-d6939751e575) it would be a solid choice for Wetterfrosch. Just like React it is great at handling single page applications [[5]](https://www.geeksforgeeks.org/vue-js-introduction-installation/). Vue however, lacks the large established community surrounding React, meaning less online resources such as compatible libraries [[4]](https://medium.com/@wutamy77/react-vue-or-angular-making-the-right-choice-for-your-project-in-2025-d6939751e575). Vue was ultimately discarded due to the fact that some team members were planning on using it as part of another assignment, and choosing React for Wetterfrosch ensured that as much ground as possible was covered.  
+
+Among the so-called big three of front-end development, Angular was the first to be rejected. This was mainly due to its complexity and being more geared towards bigger projects or enterprise environments [[4]](https://medium.com/@wutamy77/react-vue-or-angular-making-the-right-choice-for-your-project-in-2025-d6939751e575). Looking at just the advantages of Angular it shares many with React, such as scalability, an established ecosystem and a strong community [[1]](https://www.browserstack.com/guide/angular-vs-react-vs-vue), [[6]](https://www.geeksforgeeks.org/angular-tutorial/), in this case being backed by Google. But where React is considered having an easier learning curve, the opposite is often attributed to Angular [[1]](https://www.browserstack.com/guide/angular-vs-react-vs-vue). 
+
+In the end, React felt like the natural choice for Wetterfrosch, due to the project being rather small in nature but still needing the flexibility to scale up should the need or ambition arise. Vue was mainly discarded due to it being chosen for other projects. Given the context of the project and its smaller size, Angular felt too big with its rather steep learning curve.
+
+[[1] https://www.browserstack.com/guide/angular-vs-react-vs-vue](https://www.browserstack.com/guide/angular-vs-react-vs-vue)\
+[[2] https://www.geeksforgeeks.org/react/](https://www.geeksforgeeks.org/react/)\
+[[3] https://www.w3schools.com/REACT/react_intro.asp](https://www.w3schools.com/REACT/react_intro.asp)\
+[[4] https://medium.com/@wutamy77/react-vue-or-angular-making-the-right-choice-for-your-project-in-2025-d6939751e575](https://medium.com/@wutamy77/react-vue-or-angular-making-the-right-choice-for-your-project-in-2025-d6939751e575)\
+[[5] https://www.geeksforgeeks.org/vue-js-introduction-installation/](https://www.geeksforgeeks.org/vue-js-introduction-installation/)\
+[[6] https://www.geeksforgeeks.org/angular-tutorial/](https://www.geeksforgeeks.org/angular-tutorial/)
+
+
 ## Features in Detail
 
 ### Weather Display
@@ -164,4 +185,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - [@infotillandreas](https://www.github.com/infotillandreas)
 
--[@MalikTallouzi](https://github.com/MalikTallouzi)
+- [@MalikTallouzi](https://github.com/MalikTallouzi)

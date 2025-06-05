@@ -26,7 +26,7 @@ interface MediumCardProps {
     onClick?: () => void;
 }
 
-
+// MediumCard component that is used both in the favorites list and the last viewed list
 const MediumCard: React.FC<MediumCardProps> = ({ locationName, country, temperature, weatherIcon, weatherType, maxTemp, minTemp, precipitation, wind, currentTime, sunrise, sunset, showRemoveButton, onRemove, onClick }) => {
     return (
         <>

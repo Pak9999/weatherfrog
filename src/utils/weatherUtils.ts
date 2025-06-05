@@ -1,4 +1,5 @@
-// Imports för väderikoner
+// Imports weather icons and utility functions for weather data processing
+
 import clearDay from '../assets/v4/clear_day.svg';
 import clearNight from '../assets/v4/clear_night.svg';
 import mostlyClearDay from '../assets/v4/mostly_clear_day.svg';
@@ -26,7 +27,7 @@ import thunderstormDay from '../assets/v4/isolated_scattered_thunderstorms_day.s
 import thunderstormNight from '../assets/v4/isolated_scattered_thunderstorms_night.svg';
 import frog from '../assets/WF_logo.webp';
 
-
+// Transforms weather codes into corresponding weather icons and descriptions
 export const getWeatherIcon = (weatherCode: number, isDay: boolean = true): string => {
     const iconMap: { [key: number]: { day: string; night: string; description: string } } = {
         0: { day: clearDay, night: clearNight, description: "Clear sky" },
@@ -65,6 +66,7 @@ export const getWeatherIcon = (weatherCode: number, isDay: boolean = true): stri
     return isDay ? weather.day : weather.night;
 };
 
+// Transforms weather codes into corresponding weather descriptions
 export const getWeatherDescription = (weatherCode: number): string => {
     const iconMap: { [key: number]: { day: string; night: string; description: string } } = {
         0: { day: clearDay, night: clearNight, description: "Clear sky" },
@@ -100,16 +102,19 @@ export const getWeatherDescription = (weatherCode: number): string => {
     return iconMap[weatherCode]?.description || "Unknown";
 };
 
+// Gets the current time in a specific timezone based on UTC offset in seconds
 export const getCurrentTimeInTimezone = (utcOffsetSeconds: number): Date => {
     const now = new Date();
     const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
     return new Date(utcTime + (utcOffsetSeconds * 1000));
 };
 
+// Parses a time string from the API and returns a Date object
 export const parseApiTime = (timeString: string): Date => {
     return new Date(timeString);
 };
 
+// Formats a time string into a 24-hour format (HH:mm)
 export const formatTime = (timeString: string): string => {
     const date = new Date(timeString);
     return date.toLocaleTimeString('sv-SE', { 
@@ -119,6 +124,7 @@ export const formatTime = (timeString: string): string => {
     });
 };
 
+// Formats a date string into a Swedish date format (YYYY-MM-DD)
 export const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString('sv-SE', { 
@@ -127,6 +133,7 @@ export const formatDate = (dateString: string): string => {
     });
 };
 
+// Retrieves the name of the day for a given date string, considering UTC offset
 export const getDayName = (dateString: string, utcOffsetSeconds?: number): string => {
     const date = new Date(dateString);
     const today = utcOffsetSeconds ? getCurrentTimeInTimezone(utcOffsetSeconds) : new Date();
@@ -142,6 +149,7 @@ export const getDayName = (dateString: string, utcOffsetSeconds?: number): strin
     }
 };
 
+// Calculates whether a given time is during the day based on sunrise and sunset times
 export const isDay = (timeString: string, sunriseString?: string, sunsetString?: string): boolean => {
     if (!sunriseString || !sunsetString) {
         const hour = new Date(timeString).getHours();
@@ -155,6 +163,7 @@ export const isDay = (timeString: string, sunriseString?: string, sunsetString?:
     return time >= sunrise && time <= sunset;
 };
 
+// Retrieves the index of the current hour in the hourly times array, considering UTC offset
 export const getCurrentHourIndex = (hourlyTimes: string[], utcOffsetSeconds: number): number => {
     const currentTimeInLocation = getCurrentTimeInTimezone(utcOffsetSeconds);
     
@@ -165,6 +174,7 @@ export const getCurrentHourIndex = (hourlyTimes: string[], utcOffsetSeconds: num
     });
 };
 
+// Converts wind direction in degrees to a compass direction (N, NE, E, SE, S, SW, W, NW)
 export const getWindDirection = (degrees: number): string => {
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     
@@ -177,6 +187,7 @@ export const getWindDirection = (degrees: number): string => {
     return directions[directionIndex];
 };
 
+// Formats wind data into a string with both direction and speed
 export const formatWindData = (speed: number, direction: number): string => {
     const windDirection = getWindDirection(direction);
     return `${windDirection} ${speed.toFixed(1)} m/s`;

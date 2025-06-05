@@ -141,6 +141,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+
 }
 
 .search-results-dropdown li {
@@ -158,6 +159,7 @@
     font-size: 1rem;
     border-bottom: 1px solid #eee;
     transition: background-color 0.2s ease;
+    color: black;
 }
 
 .search-results-dropdown button:hover {

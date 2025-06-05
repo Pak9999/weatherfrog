@@ -25,12 +25,15 @@ interface CardWeather {
     };
 }
 
+// Cache duration for weather data in milliseconds (10 minutes)
 const CACHE_DURATION = 10 * 60 * 1000;
 
+// MediumCardCarousel component
 const MediumCardCarousel: React.FC<MediumCardCarouselProps> = ({ carouselType, cardData, onRemoveFavorite, onCardClick }) => {
     const [weatherData, setWeatherData] = useState<CardWeather>({});
     const fetchedKeys = useRef<Set<string>>(new Set());
 
+    // Fetches weather data for each card in the carousel
     useEffect(() => {
         const fetchWeatherForCards = async () => {
             const promises = cardData.map(async (card) => {

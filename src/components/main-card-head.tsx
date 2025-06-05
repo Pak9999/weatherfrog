@@ -5,7 +5,7 @@
 
 import React from "react";
 import "./main-card-head.css";
-import { saveFavorite } from "../services/weatherService";
+import { saveFavorite, getFavorites } from "../services/weatherService";
 import { getWeatherIcon, getWeatherDescription, isDay } from "../utils/weatherUtils";
 
 interface MainCardHeadProps {
@@ -27,14 +27,26 @@ interface MainCardHeadProps {
     onFavoriteAdded?: () => void;
 }
 
-
+// MainCardHead component
 const MainCardHead: React.FC<MainCardHeadProps> = ({ locationName, country, fullName, temperature, feelsLike, weatherType, maxTemp, minTemp, longitude, latitude, currentTime, sunrise, sunset, onFavoriteAdded}) => {
+    
+    // Handles adding the current location to favorites
     const handleAddToFavorites = () => {
         const location = {
             name: fullName,
             longitude: longitude,
             latitude: latitude
         };
+
+        const favorties = getFavorites();
+
+        const isAlreadyFavorite = favorties.some(fav => fav.name === location.name)
+
+        if (isAlreadyFavorite) {
+            alert(`'${fullName}' is already saved as a favorite.`);
+            return;
+        }
+
         saveFavorite(location);
 
         if (onFavoriteAdded) {

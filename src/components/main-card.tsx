@@ -3,9 +3,11 @@
 
 import React from "react";
 import "./main-card.css";
+// Components
 import MainCardHead from "./main-card-head";
 import MainCardDetails from "./main-card-details-list";
 import MainCardCarousel from "./main-card-carousel";
+// Utils
 import { getCurrentHourIndex, formatWindData } from "../utils/weatherUtils";
 import type { WeatherDetailedResponse } from "../types/weather";
 
@@ -33,7 +35,6 @@ const MainCard: React.FC<MainCardProps> = ({ weather, locationName, onFavoriteAd
                     /* Update 2 below when coded weather codes to weather type */
                     weatherIcon="/weatherfrog/assets/react.svg"
                     weatherType={weather.hourly.weather_code[safeCurrentHourIndex].toString()}
-                    /* ----- */
                     maxTemp={Math.round(weather.daily.temperature_2m_max[0]).toString()}
                     minTemp={Math.round(weather.daily.temperature_2m_min[0]).toString()}
                     longitude={weather.longitude}

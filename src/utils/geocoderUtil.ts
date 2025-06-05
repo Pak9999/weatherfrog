@@ -1,4 +1,6 @@
-// Keep track of the last request time to enforce rate limiting
+// This module provides a utility function to reverse geocode coordinates
+
+// Keeps track of the last request time to enforce rate limiting
 let lastRequestTime = 0;
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -17,23 +19,24 @@ export const reverseGeocode = async (
   country?: string;
 }> => {
   try {
-    // Rate limiting: ensure at least 1000ms (1 second) between requests
+    // Rate limiting: ensures at least 1000ms (1 second) between requests
     const now = Date.now();
     const timeSinceLastRequest = now - lastRequestTime;
     if (timeSinceLastRequest < 1000) {
-      // Wait for the remaining time to complete 1 second
+      // Waits for the remaining time to complete 1 second
       await sleep(1000 - timeSinceLastRequest);
     }
     
-    // Update last request time
+    // Updates last request time
     lastRequestTime = Date.now();
     
-    // Added a user agent as required by Nominatim usage policy
+    // Adds user-agent and accept-language headers for compliance with Nominatim's usage policy
     const headers = {
       'User-Agent': 'WeatherFrog/1.0 (Educational Project)',
       'Accept-Language': 'en-US,en;q=0.5'
     };
     
+    // Fetches location data from Nominatim's reverse geocoding API
     const response = await fetch(
       `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&zoom=10`,
       { headers }
@@ -45,6 +48,7 @@ export const reverseGeocode = async (
     
     const data = await response.json();
     
+    // Validates the received data
     if (!data || !data.display_name) {
       throw new Error('Invalid location data received');
     }

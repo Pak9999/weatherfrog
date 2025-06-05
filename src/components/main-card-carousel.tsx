@@ -17,7 +17,7 @@ interface MainCardCarouselProps {
     weather: WeatherDetailedResponse;
 }
 
-
+// MainCardCarousel component
 const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weather }) => {
     const [emblaRef] = useEmblaCarousel({
         align: 'start',
@@ -26,16 +26,19 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
         loop: false
     });
 
+    // Gets the current hour index adjusted for timezone
     const getTimeZoneAwareCurrentHourIndex = (): number => {
         return getCurrentHourIndex(weather.hourly.time, weather.utc_offset_seconds);
     };
 
+    // Gets the next 12 hours of weather data, adjusted for timezone
     const getNext12Hours = () => {
         const startIndex = getTimeZoneAwareCurrentHourIndex();
         if (startIndex === -1) return weather.hourly.time.slice(0, 12);
         return weather.hourly.time.slice(startIndex, startIndex + 12);
     };
 
+    // Gets the sunrise times for a given date
     const getSunriseForDate = (timeString: string): string => {
         // Find the corresponding sunrise for the given time
         const timeDate = new Date(timeString).toDateString();
@@ -48,6 +51,7 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
         return weather.daily.sunrise[0]; // Fallback to first day
     };
 
+    // Gets the sunset times for a given date
     const getSunsetForDate = (timeString: string): string => {
         const timeDate = new Date(timeString).toDateString();
         for (let i = 0; i < weather.daily.time.length; i++) {
@@ -57,7 +61,9 @@ const MainCardCarousel: React.FC<MainCardCarouselProps> = ({ forecastType, weath
             }
         }
         return weather.daily.sunset[0]; // Fallback to first day
-    };    return (
+    };    
+    
+    return (
         <div className="main-card-carousel-container">
             <h3>{forecastType === "hourly" ? "Hourly" : "Weekly"}</h3>
             <div className="embla" ref={emblaRef}>

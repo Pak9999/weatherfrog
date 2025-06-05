@@ -16,6 +16,7 @@ interface WeeklyCardProps {
     minTemp: string; 
 };
 
+// WeeklyCard component
 const WeeklyCard: React.FC<WeeklyCardProps> = ({ day, date, weatherIcon, weatherType, maxTemp, minTemp }) => {
     return (
         <>
