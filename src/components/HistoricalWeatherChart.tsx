@@ -34,6 +34,8 @@ interface HistoricalWeatherChartProps {
   initialLocationName?: string;
 }
 
+
+// HistoricalWeatherChart component
 const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initialLatitude, initialLongitude, initialLocationName = "Current Location" }) => {
   const [chartData, setChartData] = useState<ChartData<'line', number[], string> | null>(null);  
   const [startDate, setStartDate] = useState<string>(() => {
@@ -47,6 +49,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
   const [error, setError] = useState<string | null>(null);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   
+  // Updates window width on resize
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -58,6 +61,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     };
   }, []);
 
+  // Fetches the location name for the initial coordinates
   useEffect(() => {
     const getLocationName = async () => {
       if (initialLocationName === "Current Location" || initialLocationName === "Berlin (Fallback)") {
@@ -81,6 +85,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     getLocationName();
   }, [initialLatitude, initialLongitude, initialLocationName]);
 
+  // Fetches historical weather data for all selected locations
   useEffect(() => {
     const fetchDataForAllLocations = async () => {
       if (locations.length === 0) {
@@ -128,6 +133,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
                   formattedYearEndDate
                 );
                 
+                // Checks if the data for the year is valid
                 if (yearData.daily && yearData.daily.temperature_2m_mean) {
                   yearlyTemps.push(yearData.daily.temperature_2m_mean);
                   if (yearOffset === 1 && index === 0) {
@@ -144,6 +150,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
             
             const fiveYearAvgTemp: number[] = [];
             
+            // Calculates the 5-year average temperature for each day of the week
             if (yearlyTemps.length > 0) {
               for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
                 let total = 0;
@@ -190,6 +197,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     fetchDataForAllLocations();
   }, [startDate, locations]);
 
+  // Handles adding a new location
   const handleLocationAdd = (location: { name: string; latitude: number; longitude: number }) => {
     if (locations.length < 5) {
       if (!locations.find(l => l.latitude === location.latitude && l.longitude === location.longitude)){
@@ -202,10 +210,12 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     }
   };
 
+  // Handles removing a location
   const handleLocationRemove = (id: string) => {
     setLocations(locations.filter(loc => loc.id !== id));
   };
 
+  // Generates random RGB values for the chart line colors
   const getRandomColorValues = () => {
     const r = Math.floor(Math.random() * 200) + 25; 
     const g = Math.floor(Math.random() * 200) + 25;
@@ -217,7 +227,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
     setStartDate(event.target.value);
   };  return (
     <div className="historical-weather-chart-container">
-      <h3>Historical Weather Data (5-Year Average)</h3>
+      <h3>Compare Historical Temperatures</h3>
       <div className="control-panel">
         <div className="selected-location-title">
           {locations.length === 1 ? 
@@ -266,6 +276,12 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
               maintainAspectRatio: false,
               aspectRatio: windowWidth < 480 ? 1 : 2,
               resizeDelay: 100,
+              elements: {
+                point: {
+                  radius: windowWidth < 480 ? 4 : 8,
+                  hoverRadius: windowWidth < 480 ? 6 : 8,
+                }
+              },
               scales: {
                 x: {
                   title: {
@@ -308,7 +324,7 @@ const HistoricalWeatherChart: React.FC<HistoricalWeatherChartProps> = ({ initial
                   callbacks: {
                     label: function(tooltipItem) {
                       const label = tooltipItem.dataset.label || '';
-                      const value = tooltipItem.parsed.y !== null ? tooltipItem.parsed.y + '°C' : '';
+                      const value = tooltipItem.parsed.y !== null ? tooltipItem.parsed.y.toFixed(1) + '°C' : '';
                       return `${label}: ${value}`;
                     }
                   }
